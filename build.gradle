@@ -1,0 +1,4 @@
+allprojects {
+    group = 'campuspath'
+    version = '0.0.1-SNAPSHOT'
+}
