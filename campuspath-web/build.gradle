@@ -1,0 +1,32 @@
+plugins {
+    id "com.github.node-gradle.node" version "3.4.0"
+}
+
+ext {
+    nodeVersion         = '16.17.0' // Node LTS, compatible with Angular CLI 14.2.3
+    angularCliVersion   = '14.2.3'
+}
+
+node {
+    download    = true
+    version     = nodeVersion
+}
+
+// One time task to initialize project
+task generateAngularApp(type: NpxTask) {
+  command = "@angular/cli@$angularCliVersion"
+  args = ['new', 'CampusPath', '--directory', './']
+}
+
+// TODO: Figure out fix for hanging when trying to terminate process (Tested in Gradle daemon in IDEA)
+task ngServe(type: NpxTask) {
+  dependsOn npmInstall
+  command = 'ng'
+  args = ['serve']
+}
+
+task ngBuild(type: NpxTask) {
+    dependsOn npmInstall
+    command = 'ng'
+    args = ['build']
+}
