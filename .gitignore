@@ -39,4 +39,6 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 # IntelliJ
-.idea
+.idea/*
+!.idea/codeStyles
+!.idea/codeStyles/*
