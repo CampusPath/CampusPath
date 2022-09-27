@@ -10,6 +10,7 @@ import java.util.function.ToDoubleBiFunction;
  * {@code (from, to)} for special cases where asymmetrical behavior is desired.
  *
  * @param <T> The node type
+ * @author Brady
  */
 @FunctionalInterface
 public interface CostFunction<T extends Node<T>> extends ToDoubleBiFunction<T, T> {

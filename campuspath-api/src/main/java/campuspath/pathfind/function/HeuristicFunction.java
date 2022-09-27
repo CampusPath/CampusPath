@@ -8,6 +8,7 @@ import java.util.function.ToDoubleFunction;
  * Function which calculates the heuristic, or the cost estimate to the goal, for a given node.
  *
  * @param <T> The node type
+ * @author Brady
  */
 @FunctionalInterface
 public interface HeuristicFunction<T extends Node<T>> extends ToDoubleFunction<T> {

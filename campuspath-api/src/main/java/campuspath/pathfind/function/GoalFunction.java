@@ -10,6 +10,7 @@ import java.util.function.Predicate;
  * node in the open set, then a path has been found.
  *
  * @param <T> The node type
+ * @author Brady
  */
 @FunctionalInterface
 public interface GoalFunction<T extends Node<T>> extends Predicate<T> {
