@@ -81,13 +81,15 @@ public class BinaryHeapOpenSet<T extends BinaryHeapNode<T>> implements OpenSet<T
             }
 
             // Swap and update index
-            this.elements[parentIndex] = node;
-            node.setIndex(parentIndex);
             this.elements[index] = parent;
             parent.setIndex(index);
 
             index = parentIndex;
         }
+
+        // Update node with its new index
+        this.elements[index] = node;
+        node.setIndex(index);
     }
 
     private void heapifyDown(T node) {
