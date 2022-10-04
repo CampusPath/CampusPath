@@ -6,7 +6,7 @@ package campuspath.pathfind.node;
  * @param <S> Self-type
  * @author Brady
  */
-public abstract class AbstractCostNode<S extends AbstractCostNode<S>> implements CostNode<S> {
+public abstract class AbstractCostNode<S extends AbstractCostNode<S>> extends AbstractNode<S> implements CostNode<S> {
 
     private double cost;
 
