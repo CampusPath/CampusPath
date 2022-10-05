@@ -3,6 +3,7 @@ package campuspath.pathfind.astar;
 import campuspath.pathfind.node.AbstractCostNode;
 
 /**
+ * @param <S> Self-type
  * @author Brady
  */
 public abstract class AbstractAStarNode<S extends AbstractAStarNode<S>> extends AbstractCostNode<S> implements AStarNode<S> {
