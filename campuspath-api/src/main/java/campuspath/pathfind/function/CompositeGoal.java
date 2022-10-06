@@ -3,6 +3,7 @@ package campuspath.pathfind.function;
 import campuspath.pathfind.node.Node;
 
 /**
+ * @param <T> The node type
  * @author Brady
  */
 public final class CompositeGoal<T extends Node<T>> implements GoalFunction<T> {

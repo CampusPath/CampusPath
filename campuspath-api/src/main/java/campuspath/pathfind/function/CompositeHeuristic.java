@@ -3,6 +3,7 @@ package campuspath.pathfind.function;
 import campuspath.pathfind.node.Node;
 
 /**
+ * @param <T> The node type
  * @author Brady
  */
 public final class CompositeHeuristic<T extends Node<T>> implements HeuristicFunction<T> {
