@@ -1,6 +1,6 @@
-package campuspath.pathfind.astar.set;
+package campuspath.pathfind.algorithm.astar.set;
 
-import campuspath.pathfind.astar.OpenSet;
+import campuspath.pathfind.algorithm.astar.OpenSet;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;

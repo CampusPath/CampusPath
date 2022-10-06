@@ -1,4 +1,4 @@
-package campuspath.pathfind.astar;
+package campuspath.pathfind.algorithm.astar;
 
 import campuspath.pathfind.Path;
 import campuspath.pathfind.Pathfinder;

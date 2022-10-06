@@ -1,6 +1,6 @@
-package campuspath.pathfind.astar.set;
+package campuspath.pathfind.algorithm.astar.set;
 
-import campuspath.pathfind.astar.AStarNode;
+import campuspath.pathfind.algorithm.astar.AStarNode;
 
 /**
  * @param <S> Self-type
