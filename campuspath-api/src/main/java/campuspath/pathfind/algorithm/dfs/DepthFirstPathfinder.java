@@ -1,4 +1,4 @@
-package campuspath.pathfind.algorithm.bfs;
+package campuspath.pathfind.algorithm.dfs;
 
 import campuspath.pathfind.AbstractPathfinder;
 import campuspath.pathfind.Path;
@@ -7,27 +7,26 @@ import campuspath.pathfind.node.VisitableNode;
 import campuspath.pathfind.traversal.Move;
 import campuspath.pathfind.traversal.MoveProvider;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Optional;
+import java.util.Stack;
 
 /**
  * @param <T> The node type
  * @author Brady
  */
-public final class BreadthFirstPathfinder<T extends VisitableNode<T>> extends AbstractPathfinder<T, Move<T>> {
+public final class DepthFirstPathfinder<T extends VisitableNode<T>> extends AbstractPathfinder<T, Move<T>> {
 
-    public BreadthFirstPathfinder(T start, MoveProvider<T, Move<T>> moves, GoalFunction<T> goal) {
+    public DepthFirstPathfinder(T start, MoveProvider<T, Move<T>> moves, GoalFunction<T> goal) {
         super(start, moves, goal);
     }
 
     @Override
     public Optional<Path<T>> find() {
-        Deque<T> queue = new ArrayDeque<>();
-        queue.add(this.start);
+        Stack<T> stack = new Stack<>();
+        stack.add(this.start);
 
-        while (!queue.isEmpty()) {
-            T node = queue.pop();
+        while (!stack.isEmpty()) {
+            T node = stack.pop();
 
             if (this.goal.test(node)) {
                 return Optional.of(Path.assemble(node));
@@ -38,7 +37,7 @@ public final class BreadthFirstPathfinder<T extends VisitableNode<T>> extends Ab
                 if (!adjacent.visited()) {
                     adjacent.visit();
                     adjacent.setPrevious(node);
-                    queue.add(adjacent);
+                    stack.add(adjacent);
                 }
             }
         }
