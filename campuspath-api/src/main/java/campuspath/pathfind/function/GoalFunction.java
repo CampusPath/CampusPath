@@ -21,4 +21,21 @@ public interface GoalFunction<T extends Node<T>> extends Predicate<T> {
      */
     @Override
     boolean test(T node);
+
+    @SafeVarargs
+    static <T extends Node<T>> GoalFunction<T> any(GoalFunction<T>... goals) {
+        return switch (goals.length) {
+            case 0 -> throw new IllegalArgumentException("At least one goal function must be provided");
+            case 1 -> goals[0];
+            case 2 -> node -> goals[0].test(node) || goals[1].test(node);
+            default -> node -> {
+                for (var g : goals) {
+                    if (g.test(node)) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+        };
+    }
 }
