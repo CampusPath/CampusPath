@@ -23,11 +23,11 @@ public final class BreadthFirstPathfinder<T extends VisitableNode<T>> extends Ab
 
     @Override
     public Optional<Path<T>> find() {
-        Deque<T> queue = new ArrayDeque<>();
-        queue.add(this.start);
+        Deque<T> deque = new ArrayDeque<>();
+        deque.add(this.start);
 
-        while (!queue.isEmpty()) {
-            T node = queue.pop();
+        while (!deque.isEmpty()) {
+            T node = deque.poll();
 
             if (this.goal.test(node)) {
                 return Optional.of(Path.assemble(node));
@@ -38,7 +38,7 @@ public final class BreadthFirstPathfinder<T extends VisitableNode<T>> extends Ab
                 if (!adjacent.visited()) {
                     adjacent.visit();
                     adjacent.setPrevious(node);
-                    queue.add(adjacent);
+                    deque.add(adjacent);
                 }
             }
         }

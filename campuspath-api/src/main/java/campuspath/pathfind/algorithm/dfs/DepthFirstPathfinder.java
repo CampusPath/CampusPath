@@ -7,8 +7,9 @@ import campuspath.pathfind.node.VisitableNode;
 import campuspath.pathfind.traversal.Move;
 import campuspath.pathfind.traversal.MoveProvider;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Optional;
-import java.util.Stack;
 
 /**
  * @param <T> The node type
@@ -22,11 +23,11 @@ public final class DepthFirstPathfinder<T extends VisitableNode<T>> extends Abst
 
     @Override
     public Optional<Path<T>> find() {
-        Stack<T> stack = new Stack<>();
-        stack.add(this.start);
+        Deque<T> deque = new ArrayDeque<>();
+        deque.add(this.start);
 
-        while (!stack.isEmpty()) {
-            T node = stack.pop();
+        while (!deque.isEmpty()) {
+            T node = deque.pop();
 
             if (this.goal.test(node)) {
                 return Optional.of(Path.assemble(node));
@@ -37,7 +38,7 @@ public final class DepthFirstPathfinder<T extends VisitableNode<T>> extends Abst
                 if (!adjacent.visited()) {
                     adjacent.visit();
                     adjacent.setPrevious(node);
-                    stack.add(adjacent);
+                    deque.add(adjacent);
                 }
             }
         }
