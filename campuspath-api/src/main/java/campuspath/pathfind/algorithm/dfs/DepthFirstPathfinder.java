@@ -38,7 +38,7 @@ public final class DepthFirstPathfinder<T extends VisitableNode<T>> extends Abst
                 if (!adjacent.visited()) {
                     adjacent.visit();
                     adjacent.setPrevious(node);
-                    deque.add(adjacent);
+                    deque.push(adjacent);
                 }
             }
         }

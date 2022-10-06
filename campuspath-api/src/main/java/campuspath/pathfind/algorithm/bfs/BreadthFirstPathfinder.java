@@ -38,7 +38,7 @@ public final class BreadthFirstPathfinder<T extends VisitableNode<T>> extends Ab
                 if (!adjacent.visited()) {
                     adjacent.visit();
                     adjacent.setPrevious(node);
-                    deque.add(adjacent);
+                    deque.offer(adjacent);
                 }
             }
         }
