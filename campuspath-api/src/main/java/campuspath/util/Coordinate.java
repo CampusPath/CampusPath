@@ -6,7 +6,7 @@ package campuspath.util;
 public class Coordinate {
 
     // The radius of the Earth in miles
-    static int radius = 3956;
+    private static final int RADIUS = 3956;
     public double lat;
     public double lon;
 
@@ -35,15 +35,11 @@ public class Coordinate {
         var lat2 = Math.toRadians(coor.lat);
 
         // Haversine formula
-        var dlon = lon2 - lon1;
-        var dlat = lat2 - lat1;
-        var a = Math.pow(Math.sin(dlat / 2), 2)
-                + Math.cos(lat1) * Math.cos(lat2)
-                * Math.pow(Math.sin(dlon / 2), 2);
+        var sinLon = Math.sin((lon2 - lon1) / 2);
+        var sinLat = Math.sin((lat2 - lat1) / 2);
+        var a = sinLat * sinLat + Math.cos(lat1) * Math.cos(lat2) * sinLon * sinLon;
 
         var c = 2 * Math.asin(Math.sqrt(a));
-
-        // calculate the result
-        return (c * (double) radius);
+        return (c * (double) RADIUS);
     }
 }
