@@ -5,39 +5,41 @@ package campuspath.util;
  */
 public class Coordinate {
 
-    // The radius of the Earth in miles
+    /**
+     * The radius of the Earth in miles
+     */
     private static final int RADIUS = 3956;
     public double lat;
-    public double lon;
+    public double lng;
 
     /**
-     * Creates a coordinate with lattitude and longitude
+     * Creates a coordinate with latitude and longitude
      *
-     * @param latitude  The latitide of the coordinate
+     * @param latitude  The latitude of the coordinate
      * @param longitude The longitude of the coordinate
      */
     public Coordinate(double latitude, double longitude) {
         this.lat = latitude;
-        this.lon = longitude;
+        this.lng = longitude;
     }
 
     /**
      * Returns the distance between any two coordinates in miles
      *
      * @param coor The coordinate to find the distance to
-     * @return The distance from one coordinate to another in miles.
+     * @return The distance in miles.
      */
     public double distance(Coordinate coor) {
         // Convert all degrees into radians
-        var lon1 = Math.toRadians(this.lon);
-        var lon2 = Math.toRadians(coor.lon);
+        var lng1 = Math.toRadians(this.lng);
+        var lng2 = Math.toRadians(coor.lng);
         var lat1 = Math.toRadians(this.lat);
         var lat2 = Math.toRadians(coor.lat);
 
         // Haversine formula
-        var sinLon = Math.sin((lon2 - lon1) / 2);
+        var sinLng = Math.sin((lng2 - lng1) / 2);
         var sinLat = Math.sin((lat2 - lat1) / 2);
-        var a = sinLat * sinLat + Math.cos(lat1) * Math.cos(lat2) * sinLon * sinLon;
+        var a = sinLat * sinLat + Math.cos(lat1) * Math.cos(lat2) * sinLng * sinLng;
 
         var c = 2 * Math.asin(Math.sqrt(a));
         return (c * (double) RADIUS);
