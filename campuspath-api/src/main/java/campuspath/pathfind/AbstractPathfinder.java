@@ -6,6 +6,8 @@ import campuspath.pathfind.traversal.Move;
 import campuspath.pathfind.traversal.MoveProvider;
 
 /**
+ * @param <T> The node type
+ * @param <M> The move type
  * @author Brady
  */
 public abstract class AbstractPathfinder<T extends Node<T>, M extends Move<T>> implements Pathfinder<T> {
