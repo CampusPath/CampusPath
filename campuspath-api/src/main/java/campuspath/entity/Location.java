@@ -28,21 +28,13 @@ public final class Location extends Coordinate {
         super(latitude, longitude);
     }
 
-    public void setLatitude(double lat) {
-        this.lat = lat;
-    }
-
     @Basic(optional = false)
     public double getLatitude() {
-        return this.lat;
-    }
-
-    public void setLongitude(double lng) {
-        this.lng = lng;
+        return super.getLatitude();
     }
 
     @Basic(optional = false)
     public double getLongitude() {
-        return this.lng;
+        return super.getLongitude();
     }
 }
