@@ -55,11 +55,14 @@ public class BinaryHeapOpenSet<T extends BinaryHeapNode<T>> implements OpenSet<T
         cheapest.setOpen(false);
         cheapest.setIndex(-1);
 
-        var last = this.elements[this.size - 1];
-        this.setElement(0, last);
-        this.size--;
-
-        this.heapifyDown(last);
+        if (this.size > 1) {
+            var last = this.elements[this.size - 1];
+            this.setElement(0, last);
+            this.size--;
+            this.heapifyDown(last);
+        } else {
+            this.size--;
+        }
 
         return cheapest;
     }
