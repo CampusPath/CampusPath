@@ -1,6 +1,6 @@
-package campuspath.repository;
+package campuspath.app.repository;
 
-import campuspath.entity.Location;
+import campuspath.app.entity.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

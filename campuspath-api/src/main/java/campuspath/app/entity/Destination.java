@@ -1,4 +1,4 @@
-package campuspath.entity;
+package campuspath.app.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;

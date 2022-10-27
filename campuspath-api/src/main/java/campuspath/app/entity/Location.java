@@ -1,4 +1,4 @@
-package campuspath.entity;
+package campuspath.app.entity;
 
 import campuspath.util.Coordinate;
 import jakarta.persistence.*;
