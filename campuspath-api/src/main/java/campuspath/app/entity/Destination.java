@@ -1,5 +1,6 @@
 package campuspath.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -15,9 +16,11 @@ public final class Destination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
+    @JsonView(Query.class)
     private UUID id;
 
     @Column(nullable = false)
+    @JsonView(Query.class)
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY)
@@ -46,4 +49,6 @@ public final class Destination {
     public void setLocations(Set<Location> locations) {
         this.locations = locations;
     }
+
+    public static class Query {}
 }
