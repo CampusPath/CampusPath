@@ -17,6 +17,6 @@ public interface DestinationRepository extends JpaRepository<Destination, UUID> 
     @Query
     List<Destination> findByNameContainsIgnoreCase(String name);
 
-    @Query(value = "SELECT * FROM t_todo todo WHERE ?1 % ANY(STRING_TO_ARRAY(todo.title,' '))", nativeQuery = true)
+    @Query(value = "SELECT * FROM destination WHERE ?1 % ANY(STRING_TO_ARRAY(destination.title,' '))", nativeQuery = true)
     List<Destination> findAllMatching(String partialTitle);
 }
