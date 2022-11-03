@@ -1,4 +1,4 @@
-package campuspath.app;
+package campuspath.app.api;
 
 import campuspath.app.entity.Destination;
 import campuspath.app.service.DestinationService;
