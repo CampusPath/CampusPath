@@ -20,6 +20,6 @@ public final class DestinationService {
     }
 
     public List<Destination> lookup(String query) {
-        return this.repo.findByNameContainsIgnoreCase(query);
+        return this.repo.findAllMatching(query);
     }
 }
