@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { GeolocationService } from '@ng-web-apis/geolocation';
+
+//import { GeolocationService } from '@ng-web-apis/geolocation';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,14 @@ import { GeolocationService } from '@ng-web-apis/geolocation';
 export class AppComponent {
   title = 'CampusPath';
 
-  constructor(private readonly geolocation$: GeolocationService) {
+  constructor(/*private readonly geolocation$: GeolocationService*/) {
   }
 
+  /*
   getPosition() {
     this.geolocation$.subscribe(position => {
       doSomethingWithPosition(position);
     });
   }
+  */
 }
