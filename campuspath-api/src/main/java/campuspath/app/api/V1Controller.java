@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Brady
@@ -23,7 +23,7 @@ public final class V1Controller {
 
     @GetMapping("/search")
     @JsonView(Destination.Query.class)
-    public List<Destination> search(@RequestParam("q") final String query) {
+    public Set<Destination> search(@RequestParam("q") final String query) {
         return this.destinations.lookup(query);
     }
 

@@ -2,10 +2,12 @@ package campuspath.app.service;
 
 import campuspath.app.entity.Destination;
 import campuspath.app.repository.DestinationRepository;
+import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * @author Brady
@@ -19,7 +21,15 @@ public final class DestinationService {
         this.repo = repo;
     }
 
-    public List<Destination> lookup(String query) {
-        return this.repo.findAllMatching(query);
+    public Set<Destination> lookup(String query) {
+        if (query.length() < 2) {
+            return Collections.emptySet();
+        }
+
+        var contains = this.repo.findByNameContainsIgnoreCase(query);
+        var matching = this.repo.findAllMatching(query);
+
+        // Join all the queries
+        return Sets.union(contains, matching);
     }
 }
