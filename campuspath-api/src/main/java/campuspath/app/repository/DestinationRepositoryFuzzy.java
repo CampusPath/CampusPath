@@ -1,4 +1,4 @@
-package campuspath.app.api;
+package campuspath.app.repository;
 
 import campuspath.app.entity.Destination;
 import org.springframework.data.jpa.repository.JpaRepository;
