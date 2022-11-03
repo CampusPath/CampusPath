@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * @author Ben
+ */
 @Repository
 public interface DestinationRepositoryFuzzy extends JpaRepository<Destination, UUID> {
 
