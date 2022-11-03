@@ -6,7 +6,7 @@ import { SearchMenuComponent } from './search-menu/search-menu.component';
 import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
-  { path: 'menu', component: MenuComponent},
+  { path: '', component: MenuComponent},
   { path: 'info', component: InfoMenuComponent },
   { path: 'search', component: SearchMenuComponent },
   { path: 'map', component: MapComponent }
