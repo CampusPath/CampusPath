@@ -14,6 +14,7 @@ import java.util.UUID;
 @Repository
 public interface DestinationRepositoryFuzzy extends JpaRepository<Destination, UUID> {
 
+    // Perform a
     @Query(value = "SELECT * FROM t_todo todo WHERE ?1 % ANY(STRING_TO_ARRAY(todo.title,' '))", nativeQuery = true)
     List<Destination> findAllMatching(String partialTitle);
 
