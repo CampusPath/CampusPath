@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MapComponent } from './map/map.component';
 import { SearchMenuComponent } from './search-menu/search-menu.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InfoPopupComponent } from './info-popup/info-popup.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MenuComponent,
     InfoMenuComponent,
     MapComponent,
-    SearchMenuComponent
+    SearchMenuComponent,
+    InfoPopupComponent
   ],
   imports: [
     BrowserModule,
