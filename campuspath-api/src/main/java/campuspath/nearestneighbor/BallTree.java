@@ -1,4 +1,15 @@
 package campuspath.nearestneighbor;
 
-public class BallTree {
+import campuspath.util.Coordinate;
+
+/**
+ * @Author Ben
+ */
+public class BallTree implements NearestNeighbor {
+
+
+    @Override
+    public Coordinate findNearest(Coordinate coor) {
+        return null;
+    }
 }
