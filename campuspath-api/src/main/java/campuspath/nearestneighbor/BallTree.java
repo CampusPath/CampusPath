@@ -3,7 +3,7 @@ package campuspath.nearestneighbor;
 import campuspath.util.Coordinate;
 
 /**
- * @Author Ben
+ * @author Ben
  */
 public class BallTree implements NearestNeighbor {
 
