@@ -10,6 +10,8 @@ import { MapComponent } from './map/map.component';
 import { SearchMenuComponent } from './search-menu/search-menu.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfoPopupComponent } from './info-popup/info-popup.component';
+import { PrivacyPopupComponent } from './privacy-popup/privacy-popup.component';
+import { AboutUsPopupComponent } from './about-us-popup/about-us-popup.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { InfoPopupComponent } from './info-popup/info-popup.component';
     InfoMenuComponent,
     MapComponent,
     SearchMenuComponent,
-    InfoPopupComponent
+    InfoPopupComponent,
+    PrivacyPopupComponent,
+    AboutUsPopupComponent
   ],
   imports: [
     BrowserModule,
