@@ -51,9 +51,9 @@ public class Coordinate {
      * Compares two Coordinates on a given axis
      *
      * @param axis The axis to compare on
-     * **/
-    public static Comparator<Coordinate> compareAxis(int axis){
-       return axis == 0
+     **/
+    public static Comparator<Coordinate> compareAxis(int axis) {
+        return axis == 0
                 ? Comparator.comparingDouble(Coordinate::getLatitude)
                 : Comparator.comparingDouble(Coordinate::getLongitude);
     }
