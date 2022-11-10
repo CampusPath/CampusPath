@@ -14,11 +14,11 @@ public final class Campus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
-    private UUID id;
+    public UUID id;
 
     @Column(nullable = false)
-    private String name;
+    public String name;
 
     @Embedded
-    private BoundingBox boundingBox;
+    public BoundingBox boundingBox;
 }
