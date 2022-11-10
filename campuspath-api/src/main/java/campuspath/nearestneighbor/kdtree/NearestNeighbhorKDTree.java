@@ -3,7 +3,7 @@ package campuspath.nearestneighbor.kdtree;
 import campuspath.nearestneighbor.NearestNeighbor;
 import campuspath.util.Coordinate;
 
-public class KDTreeNearestNeighbhor implements NearestNeighbor {
+public class NearestNeighbhorKDTree implements NearestNeighbor {
 
 
     @Override
