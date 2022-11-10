@@ -16,6 +16,7 @@ import java.util.UUID;
 public final class Location extends Coordinate {
 
     private UUID id;
+    private Campus campus;
     private List<Location> adjacent;
 
     public Location() {
@@ -35,6 +36,15 @@ public final class Location extends Coordinate {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    @ManyToOne
+    public Campus getCampus() {
+        return this.campus;
+    }
+
+    public void setCampus(Campus campus) {
+        this.campus = campus;
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
