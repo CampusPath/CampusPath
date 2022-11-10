@@ -32,11 +32,7 @@ public class KDTree implements NearestNeighbor {
             points = sortByAxis(points, axis);
             int median = (right - left) / 2;
 
-            return new KDTreeNode(
-                    points[median],
-                    constructKDTree(points, left, median, depth + 1),
-                    constructKDTree(points, median + 1, right, depth + 1)
-            );
+            return new KDTreeNode(points[median], constructKDTree(points, left, median, depth + 1), constructKDTree(points, median + 1, right, depth + 1));
         }
         return null;
     }
@@ -49,23 +45,41 @@ public class KDTree implements NearestNeighbor {
      * @return An array of sorted Coordinates.
      */
     static Coordinate[] sortByAxis(Coordinate[] points, int axis) {
-        var comparator = axis == 0
-                ? Comparator.comparing(Coordinate::getLatitude)
-                : Comparator.comparing(Coordinate::getLongitude);
+        var comparator = axis == 0 ? Comparator.comparing(Coordinate::getLatitude) : Comparator.comparing(Coordinate::getLongitude);
 
         var sorted = Arrays.copyOf(points, points.length);
         Arrays.sort(sorted, comparator);
         return sorted;
     }
 
-    public KDTreeNode searchRecursive(Coordinate coor, Coordinate currBest,int depth) {
+    /**
+     * Searches for a specific Coordinate in a KDTree recursively
+     *
+     * @param coor The coordinate we are looking for
+     * @param currBest The current closest node
+     * @param depth The current depth in the tree
+     * @param currNode The current node we are comparing
+     *
+     * @return The closest Coordinate.
+     * **/
+    public Coordinate searchRecursive(Coordinate coor, Coordinate currBest, int depth, KDTreeNode currNode) {
+        if (currNode == null) {return currBest}
+
         int axis = depth % 2;
-        if(currBest == null);
+
+        if (currNode.centroid.distance(coor) < currBest.distance(coor)) {currBest = currNode.centroid}
+
+        if (Coordinate.compareAxis(axis).compare(currNode.centroid, coor) < 0) {
+            return this.searchRecursive(coor, currBest, depth + 1, currNode.left);
+        }
+        return this.searchRecursive(coor, currBest, depth + 1, currNode.right);
     }
+
+}
 
 
     @Override
     public Coordinate findNearest(Coordinate coor) {
-        return searchRecursive(coor, null, 0).centroid;
+        return this.searchRecursive(coor, null, 0, this.root);
     }
 }
