@@ -47,11 +47,15 @@ public class Coordinate {
         return (c * (double) RADIUS);
     }
 
-    public int compareAxis(Coordinate coor1, Coordinate coor2, int axis){
-        var comparator = axis == 0
+    /**
+     * Compares two Coordinates on a given axis
+     *
+     * @param axis The axis to compare on
+     * **/
+    public static Comparator<Coordinate> compareAxis(int axis){
+       return axis == 0
                 ? Comparator.comparingDouble(Coordinate::getLatitude)
                 : Comparator.comparingDouble(Coordinate::getLongitude);
-        return comparator.compare(coor1, coor2);
     }
 
     public double getLatitude() {
