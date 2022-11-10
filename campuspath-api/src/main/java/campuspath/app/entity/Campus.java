@@ -8,7 +8,7 @@ import java.util.UUID;
 /**
  * @author Brady
  */
-@Entity(name = "Campus")
+@Entity(name = "campus")
 public final class Campus {
 
     @Id
