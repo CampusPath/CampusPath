@@ -55,13 +55,12 @@ public class KDTree implements NearestNeighbor {
     /**
      * Searches for a specific Coordinate in a KDTree recursively
      *
-     * @param coor The coordinate we are looking for
+     * @param coor     The coordinate we are looking for
      * @param currBest The current closest node
-     * @param depth The current depth in the tree
+     * @param depth    The current depth in the tree
      * @param currNode The current node we are comparing
-     *
      * @return The closest Coordinate.
-     * **/
+     **/
     public Coordinate searchRecursive(Coordinate coor, Coordinate currBest, int depth, KDTreeNode currNode) {
         if (currNode == null) {return currBest}
 
@@ -74,9 +73,6 @@ public class KDTree implements NearestNeighbor {
         }
         return this.searchRecursive(coor, currBest, depth + 1, currNode.right);
     }
-
-}
-
 
     @Override
     public Coordinate findNearest(Coordinate coor) {
