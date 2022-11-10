@@ -1,5 +1,6 @@
 package campuspath.nearestneighbor.kdtree;
 
+import campuspath.nearestneighbor.NearestNeighbor;
 import campuspath.util.Coordinate;
 
 import java.util.Arrays;
@@ -8,7 +9,7 @@ import java.util.Comparator;
 /**
  * @author Ben
  */
-public class KDTree {
+public class KDTree implements NearestNeighbor {
     public KDTreeNode root;
     public Coordinate[] points;
 
@@ -57,4 +58,14 @@ public class KDTree {
         return sorted;
     }
 
+    public KDTreeNode searchRecursive(Coordinate coor, Coordinate currBest,int depth) {
+        int axis = depth % 2;
+        if(currBest == null);
+    }
+
+
+    @Override
+    public Coordinate findNearest(Coordinate coor) {
+        return searchRecursive(coor, null, 0).centroid;
+    }
 }
