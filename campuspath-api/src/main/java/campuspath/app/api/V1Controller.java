@@ -27,9 +27,14 @@ public final class V1Controller {
         this.destinations = destinations;
     }
 
-    @GetMapping("/campus")
+    @GetMapping("/campuses")
     public List<Campus> campuses() {
         return this.campuses.getAll();
+    }
+
+    @GetMapping("/campus/{campusId}")
+    public Campus campus(@PathVariable final UUID campusId) {
+        return this.campuses.getById(campusId);
     }
 
     @GetMapping("/search/{campusId}")
