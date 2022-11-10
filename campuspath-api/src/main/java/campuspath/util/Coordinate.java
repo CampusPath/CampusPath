@@ -1,5 +1,7 @@
 package campuspath.util;
 
+import java.util.Comparator;
+
 /**
  * @author Ben
  */
@@ -43,6 +45,13 @@ public class Coordinate {
 
         var c = 2 * Math.asin(Math.sqrt(a));
         return (c * (double) RADIUS);
+    }
+
+    public int compareAxis(Coordinate coor1, Coordinate coor2, int axis){
+        var comparator = axis == 0
+                ? Comparator.comparingDouble(Coordinate::getLatitude)
+                : Comparator.comparingDouble(Coordinate::getLongitude);
+        return comparator.compare(coor1, coor2);
     }
 
     public double getLatitude() {
