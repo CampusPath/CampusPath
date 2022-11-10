@@ -1,9 +1,8 @@
-package campuspath.nearestneighbor;
+package campuspath.nearestneighbor.balltree;
 
 import campuspath.util.Coordinate;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * @author Ben

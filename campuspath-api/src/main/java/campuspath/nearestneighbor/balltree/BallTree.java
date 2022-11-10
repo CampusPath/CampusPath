@@ -1,10 +1,10 @@
-package campuspath.nearestneighbor;
+package campuspath.nearestneighbor.balltree;
 
+import campuspath.nearestneighbor.NearestNeighbor;
 import campuspath.util.Coordinate;
 
 import java.util.Arrays;
 import java.util.DoubleSummaryStatistics;
-import java.util.IntSummaryStatistics;
 
 
 /**
@@ -35,7 +35,7 @@ public class BallTree implements NearestNeighbor {
         if (points.length <= minBuckSize) {
             return new BallTree(points);
         } else {
-            
+
         }
     }
 

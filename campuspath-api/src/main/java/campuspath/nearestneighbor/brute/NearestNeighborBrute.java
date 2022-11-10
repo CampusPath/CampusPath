@@ -1,5 +1,6 @@
-package campuspath.nearestneighbor;
+package campuspath.nearestneighbor.brute;
 
+import campuspath.nearestneighbor.NearestNeighbor;
 import campuspath.util.Coordinate;
 
 import java.util.Arrays;
