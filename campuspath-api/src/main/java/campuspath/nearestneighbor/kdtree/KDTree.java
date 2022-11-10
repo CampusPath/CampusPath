@@ -1,6 +1,5 @@
 package campuspath.nearestneighbor.kdtree;
 
-import campuspath.nearestneighbor.kdtree.KDTreeNode;
 import campuspath.util.Coordinate;
 
 import java.util.Arrays;
@@ -15,7 +14,7 @@ public class KDTree {
 
     public KDTree(Coordinate[] points) {
         this.points = points;
-        this.root = constructKDTree(points, 0);
+        this.root = constructKDTree(points, 0, points.length, 0);
     }
 
     /**
@@ -25,15 +24,20 @@ public class KDTree {
      * @param depth  The current depth in the KDTree.
      * @return A KDTreeNode
      */
-    public KDTreeNode constructKDTree(Coordinate[] points, int depth) {
-        if (points.length == 0) return null;
+    public KDTreeNode constructKDTree(Coordinate[] points, int left, int right, int depth) {
+        if (right > left) {
+            int axis = depth % 2;
 
-        int axis = depth % 2;
+            points = sortByAxis(points, axis);
+            int median = (right - left) / 2;
 
-        points = sortByAxis(points, axis);
-        int median = points.length / 2;
-
-        return new KDTreeNode(points[median], constructKDTree(Arrays.copyOfRange(points, 0, median), depth + 1), constructKDTree(Arrays.copyOfRange(points, median + 1, points.length), depth + 1));
+            return new KDTreeNode(
+                    points[median],
+                    constructKDTree(points, left, median, depth + 1),
+                    constructKDTree(points, median + 1, right, depth + 1)
+            );
+        }
+        return null;
     }
 
     /**
@@ -44,14 +48,13 @@ public class KDTree {
      * @return An array of sorted Coordinates.
      */
     static Coordinate[] sortByAxis(Coordinate[] points, int axis) {
-        Comparator sorter;
-        Coordinate[] sortCopy = points.clone();
+        var comparator = axis == 0
+                ? Comparator.comparing(Coordinate::getLatitude)
+                : Comparator.comparing(Coordinate::getLongitude);
 
-        if (axis == 0) sorter = Comparator.comparing(Coordinate::getLatitude);
-        else sorter = Comparator.comparing(Coordinate::getLongitude);
-
-        Arrays.sort(sortCopy, sorter);
-        return sortCopy;
+        var sorted = Arrays.copyOf(points, points.length);
+        Arrays.sort(sorted, comparator);
+        return sorted;
     }
 
 }
