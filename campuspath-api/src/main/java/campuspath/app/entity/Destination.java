@@ -23,6 +23,9 @@ public final class Destination {
     @JsonView(Query.class)
     private String name;
 
+    @ManyToOne(optional = false)
+    private Campus campus;
+
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Location> locations;
 
@@ -40,6 +43,14 @@ public final class Destination {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Campus getCampus() {
+        return this.campus;
+    }
+
+    public void setCampus(Campus campus) {
+        this.campus = campus;
     }
 
     public Set<Location> getLocations() {

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
-import java.util.function.Predicate;
 
 /**
  * @author Brady
@@ -28,16 +27,8 @@ public final class DestinationService {
             return Collections.emptySet();
         }
 
-        var contains = this.repo.findByNameContainsIgnoreCase(query);
-        var matching = this.repo.findAllMatching(query);
-
-        // TODO: Make this filter part of the query itself
-        Predicate<Destination> filter = destination ->
-                destination.getLocations().stream().noneMatch(loc ->
-                        loc.getCampus().id.equals(campusId));
-
-        contains.removeIf(filter);
-        matching.removeIf(filter);
+        var contains = this.repo.findByCampusEqualsAndNameContainsIgnoreCase(campusId, query);
+        var matching = this.repo.findAllMatching(campusId, query);
 
         // Join all the queries
         return Sets.union(contains, matching);
