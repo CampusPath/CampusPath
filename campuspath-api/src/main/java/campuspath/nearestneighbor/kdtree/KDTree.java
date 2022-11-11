@@ -2,6 +2,7 @@ package campuspath.nearestneighbor.kdtree;
 
 import campuspath.nearestneighbor.NearestNeighbor;
 import campuspath.util.Coordinate;
+import campuspath.app.entity.Location;
 
 import java.util.Arrays;
 
@@ -10,9 +11,9 @@ import java.util.Arrays;
  */
 public class KDTree implements NearestNeighbor {
     public KDTreeNode root;
-    public Coordinate[] points;
+    public Location[] points;
 
-    public KDTree(Coordinate[] points) {
+    public KDTree(Location[] points) {
         this.points = points;
         this.root = constructKDTree(points, 0, points.length, 0);
     }
@@ -24,7 +25,7 @@ public class KDTree implements NearestNeighbor {
      * @param depth  The current depth in the KDTree.
      * @return A KDTreeNode
      */
-    public KDTreeNode constructKDTree(Coordinate[] points, int left, int right, int depth) {
+    public KDTreeNode constructKDTree(Location[] points, int left, int right, int depth) {
         if (right > left) {
             int axis = depth % 2;
 
@@ -43,7 +44,7 @@ public class KDTree implements NearestNeighbor {
      * @param axis   The axis to sort on. 0 for latitude, 1 for longitude
      * @return An array of sorted Coordinates.
      */
-    static Coordinate[] sortByAxis(Coordinate[] points, int axis) {
+    static Location[] sortByAxis(Location[] points, int axis) {
         var sorted = Arrays.copyOf(points, points.length);
         Arrays.sort(sorted, Coordinate.compareAxis(axis));
         return sorted;
@@ -58,7 +59,7 @@ public class KDTree implements NearestNeighbor {
      * @param currNode The current node we are comparing
      * @return The closest Coordinate.
      **/
-    public Coordinate searchRecursive(Coordinate coor, Coordinate currBest, int depth, KDTreeNode currNode) {
+    public Location searchRecursive(Location coor, Location currBest, int depth, KDTreeNode currNode) {
         if (currNode == null) {return currBest;}
 
         int axis = depth % 2;
@@ -71,7 +72,7 @@ public class KDTree implements NearestNeighbor {
     }
 
     @Override
-    public Coordinate findNearest(Coordinate coor) {
-        return this.searchRecursive(coor, null, 0, this.root);
+    public Location findNearest(Coordinate coor) {
+        return this.searchRecursive((Location) coor, null, 0, this.root);
     }
 }
