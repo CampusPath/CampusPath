@@ -4,7 +4,6 @@ import campuspath.nearestneighbor.NearestNeighbor;
 import campuspath.util.Coordinate;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * @author Ben
@@ -45,10 +44,8 @@ public class KDTree implements NearestNeighbor {
      * @return An array of sorted Coordinates.
      */
     static Coordinate[] sortByAxis(Coordinate[] points, int axis) {
-        var comparator = axis == 0 ? Comparator.comparing(Coordinate::getLatitude) : Comparator.comparing(Coordinate::getLongitude);
-
         var sorted = Arrays.copyOf(points, points.length);
-        Arrays.sort(sorted, comparator);
+        Arrays.sort(sorted, Coordinate.compareAxis(axis));
         return sorted;
     }
 
@@ -62,16 +59,15 @@ public class KDTree implements NearestNeighbor {
      * @return The closest Coordinate.
      **/
     public Coordinate searchRecursive(Coordinate coor, Coordinate currBest, int depth, KDTreeNode currNode) {
-        if (currNode == null) {return currBest}
+        if (currNode == null) {return currBest;}
 
         int axis = depth % 2;
 
-        if (currNode.centroid.distance(coor) < currBest.distance(coor)) {currBest = currNode.centroid}
+        if (currNode.centroid.distance(coor) < currBest.distance(coor)) {currBest = currNode.centroid;}
 
-        if (Coordinate.compareAxis(axis).compare(currNode.centroid, coor) < 0) {
+        if (Coordinate.compareAxis(axis).compare(currNode.centroid, coor) < 0)
             return this.searchRecursive(coor, currBest, depth + 1, currNode.left);
-        }
-        return this.searchRecursive(coor, currBest, depth + 1, currNode.right);
+        else return this.searchRecursive(coor, currBest, depth + 1, currNode.right);
     }
 
     @Override
