@@ -1,6 +1,7 @@
 package campuspath.nearestneighbor;
 
 import campuspath.util.Coordinate;
+import campuspath.app.entity.Location;
 
 /**
  * @author Ben
@@ -13,5 +14,5 @@ public interface NearestNeighbor {
      * @param coor The users location
      * @return The closest point
      */
-    Coordinate findNearest(Coordinate coor);
+    Location findNearest(Coordinate coor);
 }
