@@ -2,6 +2,7 @@ package campuspath.nearestneighbor.brute;
 
 import campuspath.nearestneighbor.NearestNeighbor;
 import campuspath.util.Coordinate;
+import campuspath.app.entity.Location;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -11,14 +12,14 @@ import java.util.Comparator;
  */
 public class NearestNeighborBrute implements NearestNeighbor {
 
-    private final Coordinate[] points;
+    private final Location[] points;
 
-    public NearestNeighborBrute(Coordinate[] points) {
+    public NearestNeighborBrute(Location[] points) {
         this.points = points;
     }
 
     @Override
-    public Coordinate findNearest(Coordinate coor) {
+    public Location findNearest(Coordinate coor) {
         return Arrays.stream(this.points).min(Comparator.comparingDouble(point -> point.distance(coor))).orElse(null);
     }
 }
