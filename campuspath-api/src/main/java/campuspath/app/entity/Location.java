@@ -57,4 +57,7 @@ public final class Location extends Coordinate {
     public double getLongitude() {
         return super.getLongitude();
     }
+
+    @Override
+    public double distance(Coordinate coor) {return super.distance(coor);}
 }
