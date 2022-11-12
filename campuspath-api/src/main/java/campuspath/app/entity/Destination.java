@@ -49,6 +49,14 @@ public final class Destination {
         this.name = name;
     }
 
+    public String getAbbreviation() {
+        return this.abbreviation;
+    }
+
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
+
     public Campus getCampus() {
         return this.campus;
     }
