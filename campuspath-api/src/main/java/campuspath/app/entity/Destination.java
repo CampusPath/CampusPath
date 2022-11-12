@@ -23,6 +23,10 @@ public final class Destination {
     @JsonView(Query.class)
     private String name;
 
+    @Column
+    @JsonView(Query.class)
+    private String abbreviation;
+
     @ManyToOne(optional = false)
     private Campus campus;
 
