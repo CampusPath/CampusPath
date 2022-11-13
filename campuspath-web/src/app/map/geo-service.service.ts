@@ -9,7 +9,7 @@ export class GeoService {
   constructor() {
   }
 
-  getUserLocation(options?) {
+  getUserLocation(options?: any) {
     if (!this.started) {
       this.started = true;
       navigator.geolocation.watchPosition(

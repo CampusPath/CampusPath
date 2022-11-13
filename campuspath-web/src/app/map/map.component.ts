@@ -15,17 +15,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('map')
   private mapContainer!: ElementRef<HTMLElement>;
 
-  location: Observable<any>;
-  constructor(private geoService: GeoService) {
-  }
+  
   
 
   ngOnInit(): void {
-    this.location = this.geoService.geoLocation$.pipe(
-      tap(console.log)
-    );
-
-    this.geoService.getUserLocation();
+    
 
   }
 
