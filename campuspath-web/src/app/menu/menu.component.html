@@ -1,5 +1,6 @@
 <nav>
-  <button routerLink="/map">Start</button>
+  <button (click)="grabUserCoordinates()" routerLink="/map">Start  
+  </button> <!-- Geolocation API Call. We want to subscribe as soon as user clicks "Start"-->
   <br>
   <button routerLink="/info">Information</button>
 </nav>
