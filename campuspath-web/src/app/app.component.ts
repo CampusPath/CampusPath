@@ -10,8 +10,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'CampusPath';
 
-  constructor(/*private readonly geolocation$: GeolocationService*/) {
-  }
+  
 
   /*
   getPosition() {
