@@ -22,7 +22,7 @@ import { SearchMenuComponent } from './search-menu/search-menu.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [GeoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

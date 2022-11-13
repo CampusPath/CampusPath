@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Map } from 'maplibre-gl';
 //import { GeoService } from './geo-service.service';
-//import { Observable } from 'rxjs';
-//import { tap } from 'rxjs/operators';
+import { GeoService } from './geo-service.service';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map',
@@ -11,15 +12,20 @@ import { Map } from 'maplibre-gl';
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   map: Map | undefined;
+  location!: Observable<any>;
+
+  constructor(private geoService: GeoService) {
+  }
+
 
   @ViewChild('map')
   private mapContainer!: ElementRef<HTMLElement>;
 
-  
-  
+
+
 
   ngOnInit(): void {
-    
+
 
   }
 
@@ -34,7 +40,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       zoom: initialState.zoom
     });
 
-    
+    this.location = this.geoService.geoLocation$.pipe(
+      tap(console.log),
+    );
+
+    this.geoService.getUserLocation();
+
+
 
   }
 
