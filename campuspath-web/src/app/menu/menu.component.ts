@@ -8,22 +8,12 @@ import { AppComponent } from '../app.component';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private readonly geolocation$: GeolocationService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.grabUserCoordinates();
-
-  }
-   grabUserCoordinates() { //function that executes once user clicks "Start"
-    
-    AppComponent.getPosition();
-    
-    console.log("Latitude : " + AppComponent.lat);
-    console.log("Longitude : " + AppComponent.long);
-    //this.geolocation$.subscribe();
     
 
-    
   }
+   
 
 }
