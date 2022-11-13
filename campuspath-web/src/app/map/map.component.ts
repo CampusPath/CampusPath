@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Map } from 'maplibre-gl';
-import { GeoService } from './geo-service.service';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+//import { GeoService } from './geo-service.service';
+//import { Observable } from 'rxjs';
+//import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map',
