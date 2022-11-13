@@ -8,6 +8,8 @@ import { InfoMenuComponent } from './info-menu/info-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MapComponent } from './map/map.component';
 import { SearchMenuComponent } from './search-menu/search-menu.component';
+import { GeoService } from './map/geo-service.service';
+
 
 @NgModule({
   declarations: [
