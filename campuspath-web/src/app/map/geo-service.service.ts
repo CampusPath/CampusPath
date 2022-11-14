@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { MapComponent } from './map.component';
 
-@Injectable()
+@Injectable(
+  {providedIn: 'root'}
+)
 export class GeoService {
   geoLocation$: Subject<any> = new Subject<any>();
   private started = false;
@@ -10,7 +13,7 @@ export class GeoService {
   constructor() {
   }
 
-  getUserLocation(options?: any) {
+  getUserLocation() {
     if (!this.started) {
       this.started = true;
       navigator.geolocation.watchPosition(
@@ -23,11 +26,8 @@ export class GeoService {
         (err) => {
           this.geoLocation$.error(err);
         },
-        options
+
       );
     }
   }
-
-
-
 }

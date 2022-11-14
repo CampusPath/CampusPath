@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Map } from 'maplibre-gl';
-//import { GeoService } from './geo-service.service';
 import { GeoService } from './geo-service.service';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-map',
@@ -18,13 +18,29 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
+
+
   @ViewChild('map')
   private mapContainer!: ElementRef<HTMLElement>;
+  @ViewChild('search1') search1!: ElementRef<HTMLElement>;
 
 
 
 
-  ngOnInit(): void {
+
+  ngOnInit(): void{
+
+
+
+    this.location = this.geoService.geoLocation$.pipe(
+      tap(console.log),
+    );
+
+    this.geoService.getUserLocation();
+    console.log ();
+
+
+
 
 
   }
@@ -40,18 +56,26 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       zoom: initialState.zoom
     });
 
-    this.location = this.geoService.geoLocation$.pipe(
-      tap(console.log),
-    );
-
-    this.geoService.getUserLocation();
-
-
 
   }
 
+
   ngOnDestroy() {
     this.map?.remove();
+  }
+
+  sendUserQuery($event: any){
+
+    const q = document.getElementById('search1');
+
+
+    console.log("User Searched : " + q?.nodeValue);
+   // console.log("User 2 Searched: " + this.search1.nativeElement);
+
+
+  }
+  getValue(event: Event): string {
+    return (event.target as HTMLInputElement).value;
   }
 
 }
