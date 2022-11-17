@@ -3,7 +3,8 @@ import { Observable, of } from 'rxjs';
 
 import { GeolocationService } from '@ng-web-apis/geolocation';
 
-//import { MapComponent } from './map.component';
+import { MapComponent } from './map/map.component';
+import { Coords } from './coords';
 
 
 /* geolocation documentation used as a reference:
@@ -16,17 +17,26 @@ import { GeolocationService } from '@ng-web-apis/geolocation';
 export class GeoService {
   //geoLocation$: Subject<any> = new Subject<any>();
   private started = false;
-  public lat: number = 0;
-  public lng: number = 0;
+  //public lat: number = 0;
+  //public lng: number = 0;
+
+  //private bc encapsulation gud
+  private COORDS: Coords = { lat: 0, lng: 0 };
 
   constructor() {
     navigator.geolocation.getCurrentPosition(this.success, this.error);
   }
 
+  //getter for coords
+  getCoords(): Observable<Coords> {
+    const coords = of(this.COORDS);
+    return coords;
+  }
+
   //sets lat and lng when a position is succesfully found
   success(position: any): void {
-    this.lat = position.coords.latitude;
-    this.lng = position.coords.longitude;
+    this.COORDS.lat = position.coords.latitude;
+    this.COORDS.lng = position.coords.longitude;
   }
 
   //called if watchID cant find a position

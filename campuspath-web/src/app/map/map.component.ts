@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Map } from 'maplibre-gl';
 
+import { GeoService } from '../geo-service.service';
+import { Coords } from '../coords';
 
 
 @Component({
@@ -10,23 +12,20 @@ import { Map } from 'maplibre-gl';
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy { 
   map: Map | undefined;
-  
 
-  constructor() {
-  }
+  coords: Coords = {lat: 0, lng: 0};
 
-
-
+  constructor(private geoService: GeoService) { }
 
   @ViewChild('map')
   private mapContainer!: ElementRef<HTMLElement>;
 
-
-
-
-
   ngOnInit(): void{
+    this.getUserCoords();
+  }
 
+  getUserCoords(): void {
+    this.geoService.getCoords().subscribe(coords => this.coords = coords);
   }
 
   //@ZEROMEMES replace the string below after "key=" with your key
