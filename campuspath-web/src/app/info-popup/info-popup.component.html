@@ -1,0 +1,43 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title"
+            id="modal-basic-title">
+            HOW TO USE
+        </h4>
+        <button type="button" class="close" 
+                aria-label="Close" (click)=
+                "modal.dismiss('Cross click')">
+            
+            <span aria-hidden="true">
+                x
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label>
+                    Steps:
+                </label>
+                    <p>
+                        Press Start <br>
+                        Scroll around the map <br>
+                        Search for a location via the search bar <br>
+                        Follow the path laid out to your destination <br>
+                    </p>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button"
+            class="btn btn-outline-dark"
+            (click)="modal.close('Save click')">
+            Save
+        </button>
+    </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary"
+    (click)="open(content)">
+    How to Use
+</button>

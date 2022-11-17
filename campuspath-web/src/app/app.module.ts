@@ -9,7 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { MapComponent } from './map/map.component';
 import { SearchMenuComponent } from './search-menu/search-menu.component';
 import { GeoService } from './geo-service.service';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InfoPopupComponent } from './info-popup/info-popup.component';
+import { PrivacyPopupComponent } from './privacy-popup/privacy-popup.component';
+import { AboutUsPopupComponent } from './about-us-popup/about-us-popup.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +20,16 @@ import { GeoService } from './geo-service.service';
     MenuComponent,
     InfoMenuComponent,
     MapComponent,
-    SearchMenuComponent
+    SearchMenuComponent,
+    InfoPopupComponent,
+    PrivacyPopupComponent,
+    AboutUsPopupComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [GeoService],
   bootstrap: [AppComponent]
