@@ -20,17 +20,17 @@ export class GeoService {
   public lng: number = 0;
 
   constructor() {
-    navigator.geolocation.getCurrentPosition(success, error);
+    navigator.geolocation.getCurrentPosition(this.success, this.error);
   }
 
   //sets lat and lng when a position is succesfully found
-  function success(position) {
-    lat = position.coords.latitude;
-    lng = position.coords.longitude;
+  success(position: any): void {
+    this.lat = position.coords.latitude;
+    this.lng = position.coords.longitude;
   }
 
   //called if watchID cant find a position
-  function error() {
+  error(): void {
     console.log("Could not get position.");
   }
 
@@ -38,7 +38,7 @@ export class GeoService {
   //  enableHighAccuracy: boolean
   //  maximumAge: how long to reuse a position value before refreshing
   //  timeout: how long to try and get browser location data for before timing out
-  const options = {
+  options = {
     enableHighAccuracy: true,
     maximumAge: 30000,
     timeout: 27000
@@ -46,7 +46,7 @@ export class GeoService {
 
   //watch position function. Calls either success or error function depening on if it can find a user position
   //watchPosition is called more than once, so it will update lat and lng periodically
-  const watchID = navigator.geolocation.watchPosition(success, error, options);
+  watchID = navigator.geolocation.watchPosition(this.success, this.error, this.options);
 
 
 
