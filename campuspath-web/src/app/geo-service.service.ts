@@ -5,6 +5,7 @@ import { GeolocationService } from '@ng-web-apis/geolocation';
 
 import { MapComponent } from './map/map.component';
 import { Coords } from './coords';
+import { COORDS } from './coords-instance';
 
 
 /* geolocation documentation used as a reference:
@@ -20,23 +21,23 @@ export class GeoService {
   //public lat: number = 0;
   //public lng: number = 0;
 
-  //private bc encapsulation gud
-  private COORDS: Coords = { lat: 0, lng: 0 };
-
-  constructor() {
+  constructor(private geolocationService: GeolocationService) {
     navigator.geolocation.getCurrentPosition(this.success, this.error);
   }
 
   //getter for coords
   getCoords(): Observable<Coords> {
-    const coords = of(this.COORDS);
+    const coords = of(COORDS);
     return coords;
   }
 
   //sets lat and lng when a position is succesfully found
   success(position: any): void {
-    this.COORDS.lat = position.coords.latitude;
-    this.COORDS.lng = position.coords.longitude;
+    console.log("Found position!");
+    COORDS.lat = position.coords.latitude;
+    COORDS.lng = position.coords.longitude;
+    //console.log("Lat: " + COORDS.lat);
+    //console.log("Lng: " + COORDS.lng);
   }
 
   //called if watchID cant find a position
