@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  campusPathURL: "./campuspath-api/(NEEDS TO BE CHANGED ON MERGE OF BACK-END API)"
+  
 };
 
 /*
