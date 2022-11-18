@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
+import { RouteComponent } from './route/route.component';
 import { InfoMenuComponent } from './info-menu/info-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MapComponent } from './map/map.component';
@@ -18,6 +19,7 @@ import { AboutUsPopupComponent } from './about-us-popup/about-us-popup.component
   declarations: [
     AppComponent,
     MenuComponent,
+    RouteComponent,
     InfoMenuComponent,
     MapComponent,
     SearchMenuComponent,
