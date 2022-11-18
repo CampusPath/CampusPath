@@ -13,6 +13,7 @@ import { Coords } from '../coords';
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy { 
   map: Map | undefined;
 
+  //instance of the coords interface initially set to {0, 0}
   coords: Coords = {lat: 0, lng: 0};
 
   constructor(private geoService: GeoService) { }
@@ -20,15 +21,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('map')
   private mapContainer!: ElementRef<HTMLElement>;
 
+  //overwrite the coords instance with getUserCoords on instantiation
   ngOnInit(): void{
     this.getUserCoords();
   }
 
+  //subscribe to the geoservice to set local coords variable to the user's actual coords
   getUserCoords(): void {
     this.geoService.getCoords().subscribe(coords => this.coords = coords);
   }
 
-  //@ZEROMEMES replace the string below after "key=" with your key
+  //display the map
   ngAfterViewInit() {
     const initialState = {lng: -95.252963, lat: 32.315867, zoom: 14};
 
@@ -39,10 +42,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       zoom: initialState.zoom
     });
 
-
   }
 
-
+  //remove the map
   ngOnDestroy() {
     this.map?.remove();
   }

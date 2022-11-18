@@ -1,18 +1,25 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <nav>
   <button routerLink="/">Home</button>
-  <button routerLink="/search">Search</button>
+  
 </nav>
-<!-->
-<div class="topnav">
 
-  <input #text type="text" id= "search1" name= "q" placeholder="Search for a building... ex: RBN">
-  <button (click)="" type="submit" ><i class="fa fa-search"></i></button>
-</div>
-<!-->
+<app-search-bar></app-search-bar>
+
 <div class="map-wrap">
   <a href="https://www.maptiler.com" class="watermark"><img
     src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"/></a>
   <div class="map" #map></div>
 </div>
 
+
+<!-->
+
+<button routerLink="/search">Search</button>
+
+
+<div class="topnav">
+  <input #text type="text" id= "search1" name= "q" placeholder="Search for a building... ex: RBN">
+  <button (click)="" type="submit" ><i class="fa fa-search"></i></button>
+</div>
+<!-->

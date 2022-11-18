@@ -59,24 +59,4 @@ export class GeoService {
   //watchPosition is called more than once, so it will update lat and lng periodically
   watchID = navigator.geolocation.watchPosition(this.success, this.error, this.options);
 
-
-
-  /*
-  getUserLocation() {
-    if (!this.started) {
-      this.started = true;
-      navigator.geolocation.watchPosition(
-        (position) => {
-          this.geoLocation$.next(position);
-          this.lat = position.coords.latitude;
-          this.lng = position.coords.longitude;
-          console.log("Coords: " + this.lat +" " +  this.lng);
-        },
-        (err) => {
-          this.geoLocation$.error(err);
-        },
-
-      );
-    }
-  }*/
 }
