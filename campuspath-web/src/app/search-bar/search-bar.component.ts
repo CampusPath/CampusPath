@@ -6,11 +6,17 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
-  @Input() searchText?: string;
+  //Variable that stores the text the user enters into the search bar
+  public searchText: string = "";
 
   constructor() {}
 
   ngOnInit(): void {
 
+  }
+
+  //method bound to the search button. 
+  search() {
+    console.log(this.searchText);
   }
 }
