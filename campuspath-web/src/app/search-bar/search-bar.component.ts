@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { SEARCH } from '../search-instance';
 
 @Component({
   selector: 'app-search-bar',
@@ -18,5 +19,6 @@ export class SearchBarComponent implements OnInit {
   //method bound to the search button. 
   search() {
     console.log(this.searchText);
+    SEARCH.search = this.searchText;
   }
 }
