@@ -25,7 +25,7 @@ export class APIService {
 
   promptNodeList(lat: string, lng: string, destination: string){
 
-    return this.http.get<Nodes[]>(`${environment.campusPathURL}/?route=${lat},${lng},${destination}`)
+    return this.http.get<Nodes[]>(`${environment.campusPathURL}/?route=${lat},${lng},${destination}`);
 
   }
 
