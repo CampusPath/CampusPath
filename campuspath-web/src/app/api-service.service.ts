@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
-import { Search } from './search';
+import { Nodes, Search } from './search';
 
 @Injectable({ providedIn: 'root' })
 export class APIService {
@@ -15,11 +15,17 @@ export class APIService {
 
   promptBuildingNames(search: string): Observable<Search>{
 
-    return this.http.get<Search>(`${environment.campusPathURL}/?name=${search}`).pipe(
+    return this.http.get<Search>(`${environment.campusPathURL}/?search=${search}`).pipe(
       tap(_ => this.log(`found buildings matching "${search}"`)),
       catchError(this.handleError<Search>('promptBuildingNames', ))
     );
 
+
+  }
+
+  promptNodeList(lat: string, lng: string, destination: string){
+
+    return this.http.get<Nodes[]>(`${environment.campusPathURL}/?route=${lat},${lng},${destination}`)
 
   }
 
