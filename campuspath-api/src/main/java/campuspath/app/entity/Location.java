@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -56,5 +57,20 @@ public final class Location extends Coordinate {
     @Override
     public double getLongitude() {
         return super.getLongitude();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Location loc)) {
+            return false;
+        }
+        return Objects.equals(this.id, loc.id)
+                && Objects.equals(this.getLatitude(), loc.getLatitude())
+                && Objects.equals(this.getLongitude(), loc.getLongitude());
     }
 }

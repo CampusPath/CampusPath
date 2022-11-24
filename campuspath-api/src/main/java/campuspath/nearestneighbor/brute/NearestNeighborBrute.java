@@ -1,25 +1,21 @@
 package campuspath.nearestneighbor.brute;
 
+import campuspath.app.entity.Location;
 import campuspath.nearestneighbor.NearestNeighbor;
 import campuspath.util.Coordinate;
-import campuspath.app.entity.Location;
 
-import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.Stream;
 
 /**
  * @author Ben
  */
-public class NearestNeighborBrute implements NearestNeighbor {
-
-    private final Location[] points;
-
-    public NearestNeighborBrute(Location[] points) {
-        this.points = points;
-    }
+public abstract class NearestNeighborBrute implements NearestNeighbor {
 
     @Override
-    public Location findNearest(Coordinate coor) {
-        return Arrays.stream(this.points).min(Comparator.comparingDouble(point -> point.distance(coor))).orElse(null);
+    public final Location findNearest(Coordinate coor) {
+        return getAll().min(Comparator.comparingDouble(point -> point.distance(coor))).orElse(null);
     }
+
+    protected abstract Stream<Location> getAll();
 }

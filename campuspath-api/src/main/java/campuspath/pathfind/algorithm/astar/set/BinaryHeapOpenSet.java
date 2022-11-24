@@ -38,7 +38,6 @@ public class BinaryHeapOpenSet<T extends BinaryHeapNode<T>> implements OpenSet<T
             }
 
             // Place the node in the last position and fix the heap invariant
-            node.setOpen(true);
             this.setElement(this.size, node);
             this.size++;
         }
@@ -52,7 +51,6 @@ public class BinaryHeapOpenSet<T extends BinaryHeapNode<T>> implements OpenSet<T
         }
 
         var cheapest = this.elements[0];
-        cheapest.setOpen(false);
         cheapest.setIndex(-1);
 
         if (this.size > 1) {

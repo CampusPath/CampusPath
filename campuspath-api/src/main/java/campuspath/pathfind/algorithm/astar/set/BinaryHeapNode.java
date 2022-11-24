@@ -12,7 +12,5 @@ public interface BinaryHeapNode<S extends BinaryHeapNode<S>> extends AStarNode<S
 
     int getIndex();
 
-    void setOpen(boolean open);
-
     boolean isOpen();
 }
