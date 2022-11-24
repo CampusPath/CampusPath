@@ -103,7 +103,6 @@ public final class RoutingService {
         // Initial State
         private double estimate = Double.MAX_VALUE;
         private int index = -1;
-        private boolean open = false;
 
         public LocationNode(Location location, HeuristicFunction<LocationNode> heuristic) {
             this.location = location;
