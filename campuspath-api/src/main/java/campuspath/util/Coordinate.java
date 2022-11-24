@@ -1,10 +1,17 @@
 package campuspath.util;
 
+import campuspath.app.serialize.CoordinateDeserializer;
+import campuspath.app.serialize.CoordinateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.util.Comparator;
 
 /**
  * @author Ben
  */
+@JsonSerialize(using = CoordinateSerializer.class)
+@JsonDeserialize(using = CoordinateDeserializer.class)
 public class Coordinate {
 
     /**
@@ -17,12 +24,12 @@ public class Coordinate {
     /**
      * Creates a coordinate with latitude and longitude
      *
-     * @param latitude  The latitude of the coordinate
-     * @param longitude The longitude of the coordinate
+     * @param lat The latitude of the coordinate
+     * @param lng The longitude of the coordinate
      */
-    public Coordinate(double latitude, double longitude) {
-        this.lat = latitude;
-        this.lng = longitude;
+    public Coordinate(double lat, double lng) {
+        this.lat = lat;
+        this.lng = lng;
     }
 
     /**

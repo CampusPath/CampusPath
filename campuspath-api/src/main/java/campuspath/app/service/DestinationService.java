@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,6 +21,10 @@ public final class DestinationService {
 
     public DestinationService(@Autowired DestinationRepository repo) {
         this.repo = repo;
+    }
+
+    public Optional<Destination> getById(UUID id) {
+        return this.repo.findById(id);
     }
 
     public Set<Destination> lookup(UUID campusId, String query) {
