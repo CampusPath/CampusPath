@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MapComponent } from './map/map.component';
 import { SearchMenuComponent } from './search-menu/search-menu.component';
 import { GeoService } from './geo-service.service';
+import { APIService } from './api-service.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfoPopupComponent } from './info-popup/info-popup.component';
 import { PrivacyPopupComponent } from './privacy-popup/privacy-popup.component';
@@ -37,7 +38,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     NgbModule,
     FormsModule
   ],
-  providers: [GeoService],
+  providers: [GeoService, APIService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

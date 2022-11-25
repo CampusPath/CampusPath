@@ -13,14 +13,15 @@ export class APIService {
   constructor (private http: HttpClient,
     private messageService: MessageService){}
 
-  promptBuildingNames(search: string): Observable<Search>{
+  promptBuildingNames(search: string){
 
-    return this.http.get<Search>(`${environment.campusPathURL}/?search=${search}`).pipe(
+    return this.http.get<Search[]>(`${environment.campusPathURL}/?search=${search}`);
+    /*
+    .pipe(
       tap(_ => this.log(`found buildings matching "${search}"`)),
-      catchError(this.handleError<Search>('promptBuildingNames', ))
+      catchError(this.handleError<Search[]>('promptBuildingNames', ))
     );
-
-
+    */
   }
 
   promptNodeList(lat: string, lng: string, destination: string){
