@@ -20,8 +20,16 @@ export class RouteComponent implements OnInit {
 
   //TODO Parse coordinates from Nodes[]
   getCoordsFromNodes(nodes: Nodes[]): number[][] {
-    
-    return [[]];
+    var output: number[][] = [];
+
+    for (let i = 0; i < nodes.length; i++) {
+      var temp: number[] = [];
+      temp.push(nodes[i].lat);
+      temp.push(nodes[i].lng);
+      output.push(temp);
+    }
+
+    return output;
   }
   
   //function sets the route for a given map using "nodes" as coordinates
