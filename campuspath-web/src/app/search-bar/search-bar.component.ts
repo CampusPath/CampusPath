@@ -1,6 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { APIService } from '../api-service.service';
 
+import { Observable, Subject } from 'rxjs';
+import {
+  debounceTime, distinctUntilChanged, switchMap
+} from 'rxjs/operators';
+
+import { V1 } from '../search';
+
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
@@ -8,11 +17,10 @@ import { APIService } from '../api-service.service';
 })
 export class SearchBarComponent implements OnInit {
   //Variable that stores the text the user enters into the search bar
-  public searchText: string = "";
-  destination$: Observable<Destination[]>;
+  destination$!: Observable<V1.Destination[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: APIService) {}
 
   search(term: string): void {
     this.searchTerms.next(term);
@@ -27,16 +35,7 @@ export class SearchBarComponent implements OnInit {
       distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.apiService.search(term)),
+      switchMap((term: string) => this.apiService.search(environment.defaultCampusID, term)),
     );
-
   }
-
-  //method bound to the search button. 
-/*
-  search() {
-    console.log(this.searchText);
-    SEARCH.search = this.searchText;
-  }
-  */
 }
