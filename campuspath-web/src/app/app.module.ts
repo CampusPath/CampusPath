@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
-import { RouteComponent } from './route/route.component';
+//import { RouteComponent } from './route/route.component';
 import { InfoMenuComponent } from './info-menu/info-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MapComponent } from './map/map.component';
@@ -22,7 +22,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
   declarations: [
     AppComponent,
     MenuComponent,
-    RouteComponent,
+    //RouteComponent,
     InfoMenuComponent,
     MapComponent,
     SearchMenuComponent,
