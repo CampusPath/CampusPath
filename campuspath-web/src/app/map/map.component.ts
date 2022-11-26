@@ -64,9 +64,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       center: [initialState.lng, initialState.lat],
       zoom: initialState.zoom
     });
-
-    this.map.on('data', () => {
-      this?.map?.addSource('route', {
+    
+    /* TODO: Add user position listener to call addSource and addLayer when user location changes.
+    Also removed the this.map.on('data') call, which prompted addSource and addLayer each time the map updated which
+    which resulted in excessive calls. We need to call only once user position updates. 
+    */
+   // this.map.on('data', () => {
+      this.map.addSource('route', {
       'type': 'geojson',
       'data': {
         'type': 'Feature',
@@ -78,7 +82,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    this?.map?.addLayer({
+    this.map.addLayer({
       'id': 'route',
       'type': 'line',
       'source': 'route',
@@ -91,7 +95,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         'line-width': 8
       }
     });
-    });
+   // });
   }
 
   //remove the map
