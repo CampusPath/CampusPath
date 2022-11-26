@@ -1,0 +1,39 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title"
+            id="modal-basic-title">
+            ABOUT US
+        </h4>
+        <button type="button" class="close" 
+                aria-label="Close" (click)=
+                "modal.dismiss('Cross click')">
+            
+            <span aria-hidden="true">
+                x
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                    <p>
+                        We are a team of computer science majors at The University of Texas at Tyler.<br>
+                        This app is a project for our software development class! <br>
+                        It does not record your location or personal information and we have no idea where you live! :) <br>
+                    </p>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button"
+            class="btn btn-outline-dark"
+            (click)="modal.close('Save click')">
+            Ok!
+        </button>
+    </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary"
+    (click)="open(content)">
+    About Us
+</button>
