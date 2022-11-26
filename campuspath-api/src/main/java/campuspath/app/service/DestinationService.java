@@ -35,7 +35,16 @@ public final class DestinationService {
         var contains = this.repo.findByCampusEqualsAndNameContainsIgnoreCase(campusId, query);
         var matching = this.repo.findAllMatching(campusId, query);
 
+        Set<Destination> abbrSearch;
+
+        if (query.length() > 3) {
+            String abbr = query.replaceAll("\\B.|\\P{L}", "").toUpperCase();
+            abbrSearch = this.repo.findAllMatchingAbbr(campusId, abbr);
+        } else {
+            abbrSearch = this.repo.findAllMatchingAbbr(campusId, query);
+        }
+
         // Join all the queries
-        return Sets.union(contains, matching);
+        return Sets.union(contains, matching, abbrSearch);
     }
 }
