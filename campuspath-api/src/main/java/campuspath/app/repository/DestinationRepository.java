@@ -20,4 +20,7 @@ public interface DestinationRepository extends JpaRepository<Destination, UUID> 
 
     @Query(value = "SELECT * FROM destination WHERE destination.campus = ?1 AND ?2 % ANY(STRING_TO_ARRAY(destination.name,' '))", nativeQuery = true)
     Set<Destination> findAllMatching(UUID campusId, String partialTitle);
+
+    @Query
+    Set<Destination> findAllMatchingAbbr(UUID campusId, String abbr);
 }
