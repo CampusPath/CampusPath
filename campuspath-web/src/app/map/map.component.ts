@@ -8,9 +8,9 @@ import { V1 } from '../search';
 
 /*
 TODO:
-  Route service, 
+  Route service,
     done kinda
-  User position service, 
+  User position service,
     done
   Check user position against route
     done
@@ -23,11 +23,11 @@ TODO:
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit, AfterViewInit, OnDestroy { 
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   map: Map | undefined;
 
   //variables for routing
-  route: V1.Route = {distance: 0, points: [[]]};
+  route: V1.Route = {distance: 0, points: []};
   dest: V1.Destination | undefined;
   userCoords: Coords = {lat: 0, lng: 0};
   counter: number = 0;
@@ -115,17 +115,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         this.route?.points[this.counter][1])) {
           this.counter++;
       }
-  
+
       let updatedPoints: number[][] = [];
       updatedPoints.push([this.userCoords.lat, this.userCoords.lng]);
-  
+
       for(let i = this.counter; i < this.route.points.length; i++) {
         updatedPoints.push([this.route.points[i][0], this.route.points[i][1]]);
       }
-  
+
       return updatedPoints;
     }
-  
+
     //check if |user.lat - param lat| and |user.lng - param lng| are within some nearness threshold
     //this will need tweaking
     //0.0001 roughly equals 11.1 meters, so this will have about 22.2 meters leeway
@@ -135,7 +135,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     userIsNear(lat: number, lng: number): boolean {
       let latDiff = Math.abs(this.userCoords.lat - lat);
       let lngDiff = Math.abs(this.userCoords.lng - lng);
-  
+
       return ((latDiff <= this.latThresh) && (lngDiff <= this.lngThresh));
     }
 }
