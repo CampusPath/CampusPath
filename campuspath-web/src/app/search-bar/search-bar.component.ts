@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { APIService } from '../api-service.service';
 
 import { Observable, Subject } from 'rxjs';
