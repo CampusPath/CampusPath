@@ -17,7 +17,7 @@ import { COORDS } from './coords-instance';
 )
 export class GeoService {
   //geoLocation$: Subject<any> = new Subject<any>();
-  private started = false;
+  //private started = false;
   //public lat: number = 0;
   //public lng: number = 0;
 

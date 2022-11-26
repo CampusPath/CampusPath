@@ -17,6 +17,7 @@ export interface Nodes {
   lng: number;
 }
 
+
 export namespace V1 {
 
   export interface Campus {
