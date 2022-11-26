@@ -45,7 +45,7 @@ export class APIService {
    * @param campusId The UUID of the campus to search
    * @param query    A user query string for a destination
    */
-  promptBuildingNames(campusId: string, query: string) {
+  search(campusId: string, query: string) {
     return this.http.get<V1.Destination[]>(`${environment.apiURL}/v1/search/${campusId}?q=${query}`);
     /*
     .pipe(
@@ -62,7 +62,7 @@ export class APIService {
    * @param lng The user's current longitude
    * @param destination The UUID of the desired destination
    */
-  promptNodeList(lat: number, lng: number, destination: string) {
+  route(lat: number, lng: number, destination: string) {
     return this.http.post<V1.Route>(`${environment.apiURL}/v1/route`, {
       location: [lat, lng],
       destination: destination
