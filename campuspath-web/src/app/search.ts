@@ -12,7 +12,29 @@ export interface Search {
 //Interface to store the server's response (list of nodes) and allow them to be passed around between components
 // lat = latitude
 //lng = longitude
-export interface Nodes{
+export interface Nodes {
   lat: number;
   lng: number;
+}
+
+export namespace V1 {
+
+  export interface Campus {
+    id: string;
+    name: string;
+    minLat: number;
+    minLng: number;
+    maxLat: number;
+    maxLng: number;
+  }
+
+  export interface Destination {
+    label: string;
+    id: string;
+  }
+
+  export interface Route {
+    distance: number;
+    points: number[][]; // an array of 2-element arrays representing [lat, lng]
+  }
 }

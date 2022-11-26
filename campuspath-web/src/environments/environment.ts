@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  campusPathURL: "./campuspath-api/(NEEDS TO BE CHANGED ON MERGE OF BACK-END API)"
-  
+  apiURL: 'http://localhost:8080/api/'
 };
 
 /*
