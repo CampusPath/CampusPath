@@ -5,9 +5,9 @@
 
  <ul class="search-result">
   <li *ngFor="let dest of destination$ | async" >
-    <a routerLink="/map">
+    <button (click)="sendBuildingLabel(dest.label)">
       {{dest.label}}
-    </a>
+    </button>
   </li>
 </ul>
 </div>

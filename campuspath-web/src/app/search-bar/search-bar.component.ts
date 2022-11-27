@@ -38,4 +38,14 @@ export class SearchBarComponent implements OnInit {
       switchMap((term: string) => this.apiService.search(environment.defaultCampusID, term)),
     );
   }
+
+/*
+TODO: Take building label and grab coordinates and send it to api service to get back
+*/
+  sendBuildingLabel(buildingLabel){
+
+
+
+  }
+
 }
