@@ -9,7 +9,7 @@ import {
 import { V1 } from '../search';
 
 import { environment } from 'src/environments/environment';
-import { Coords } from '../coords';
+import { COORDS } from '../coords-instance';
 
 
 @Component({
@@ -21,8 +21,7 @@ export class SearchBarComponent implements OnInit {
   //Variable that stores the text the user enters into the search bar
   destination$!: Observable<V1.Destination[]>;
   private searchTerms = new Subject<string>();
-  userLat = Coords.lat;
-  userLng = Coords.lng;
+
 
   constructor(private apiService: APIService) {}
 
@@ -43,14 +42,5 @@ export class SearchBarComponent implements OnInit {
     );
   }
 
-/*
-TODO: Take building label and grab coordinates and send it to api service to get back list of nodes and assign it to 2d array 
-for map component
-*/
-  sendBuildingLabel(buildingId){
-    //this.apiService.route(this.userLat, this.userLng, buildingId).subscribe();
-
-
-  }
 
 }
