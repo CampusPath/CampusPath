@@ -5,12 +5,10 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
-//import { RouteComponent } from './route/route.component';
 import { InfoMenuComponent } from './info-menu/info-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MapComponent } from './map/map.component';
 import { SearchMenuComponent } from './search-menu/search-menu.component';
-import { GeoService } from './geo-service.service';
 import { APIService } from './api-service.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfoPopupComponent } from './info-popup/info-popup.component';
@@ -22,7 +20,6 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
   declarations: [
     AppComponent,
     MenuComponent,
-    //RouteComponent,
     InfoMenuComponent,
     MapComponent,
     SearchMenuComponent,
@@ -38,7 +35,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     NgbModule,
     FormsModule
   ],
-  providers: [GeoService, APIService],
+  providers: [APIService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
