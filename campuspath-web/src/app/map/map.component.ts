@@ -59,7 +59,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       zoom: initialState.zoom
     });
 
-    let geolocation = new GeolocateControl({
+    let geolocate = new GeolocateControl({
       positionOptions: {
         enableHighAccuracy: true,
         maximumAge: 30000,
@@ -68,17 +68,19 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       trackUserLocation: true
     });
 
-    // Add the geolocation control and setup relevant event callbacks
-    this.map.addControl(geolocation);
-    geolocation.on('trackuserlocationstart', () => {
+    // Setup relevant event callbacks
+    geolocate.on('trackuserlocationstart', () => {
       console.log('Enabled Tracking');
     });
-    geolocation.on('trackuserlocationend', () => {
+    geolocate.on('trackuserlocationend', () => {
       console.log('Disabled Tracking');
     });
-    geolocation.on('geolocate', (position: GeolocationPosition) => {
+    geolocate.on('geolocate', (position: GeolocationPosition) => {
       console.log('New position: ' + position.coords.toString());
-    })
+    });
+    // Add the control and request the user's location upon map load
+    this.map.addControl(geolocate);
+    this.map.on('load', () => geolocate.trigger());
 
     // TODO: Add user position listener to call addSource and addLayer when user location changes.
     this.map.addSource('route', {
