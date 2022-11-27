@@ -30,7 +30,7 @@ public final class Destination {
     @ManyToOne(optional = false)
     private Campus campus;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Location> locations;
 
     public UUID getId() {
