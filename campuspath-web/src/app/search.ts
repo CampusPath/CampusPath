@@ -29,8 +29,9 @@ export namespace V1 {
   }
 
   export interface Destination {
-    label: string;
     id: string;
+    name: string;
+    abbreviation: string;
   }
 
   export interface Route {

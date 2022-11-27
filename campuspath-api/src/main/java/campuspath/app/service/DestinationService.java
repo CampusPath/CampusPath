@@ -1,6 +1,7 @@
 package campuspath.app.service;
 
 import campuspath.app.entity.Destination;
+import campuspath.app.repository.CampusRepository;
 import campuspath.app.repository.DestinationRepository;
 import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,11 @@ import java.util.UUID;
 public final class DestinationService {
 
     private final DestinationRepository repo;
+    private final CampusRepository campuses;
 
-    public DestinationService(@Autowired DestinationRepository repo) {
+    public DestinationService(@Autowired DestinationRepository repo, @Autowired CampusRepository campuses) {
         this.repo = repo;
+        this.campuses = campuses;
     }
 
     public Optional<Destination> getById(UUID id) {
@@ -32,16 +35,17 @@ public final class DestinationService {
             return Collections.emptySet();
         }
 
-        var contains = this.repo.findByCampusEqualsAndNameContainsIgnoreCase(campusId, query);
-        var matching = this.repo.findAllMatching(campusId, query);
+        var campus = this.campuses.getReferenceById(campusId);
+        var contains = this.repo.findByCampusEqualsAndNameContainsIgnoreCase(campus, query);
+        var matching = this.repo.findAllMatching(campus.id, query);
 
         Set<Destination> abbrSearch;
 
         if (query.length() > 3) {
             String abbr = query.replaceAll("\\B.|\\P{L}", "").toUpperCase();
-            abbrSearch = this.repo.findByCampusEqualsAndAbbreviationEquals(campusId, abbr);
+            abbrSearch = this.repo.findByCampusEqualsAndAbbreviationEquals(campus, abbr);
         } else {
-            abbrSearch = this.repo.findByCampusEqualsAndAbbreviationEquals(campusId, query);
+            abbrSearch = this.repo.findByCampusEqualsAndAbbreviationEquals(campus, query);
         }
 
         // Join all the queries
