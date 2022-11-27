@@ -2,7 +2,8 @@
 <nav>
   <button routerLink="/">Home</button>
 </nav>
-<app-search-bar (routeEvent)="onRoute($event)"></app-search-bar>
+<app-search-bar (routeEvent)="routeTo($event)"></app-search-bar>
+<!--FIXME: Make the map not go off of the screen -->
 <div class="map-wrap">
   <a href="https://www.maptiler.com" class="watermark">
     <img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"/>

@@ -16,15 +16,15 @@ public final class Destination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
-    @JsonView(Query.class)
+    @JsonView(Views.APIMinimal.class)
     private UUID id;
 
     @Column(nullable = false)
-    @JsonView(Query.class)
+    @JsonView(Views.APIMinimal.class)
     private String name;
 
     @Column
-    @JsonView(Query.class)
+    @JsonView(Views.APIMinimal.class)
     private String abbreviation;
 
     @ManyToOne(optional = false)
@@ -72,6 +72,4 @@ public final class Destination {
     public void setLocations(Set<Location> locations) {
         this.locations = locations;
     }
-
-    public static class Query {}
 }

@@ -14,7 +14,8 @@ public final class CoordinateSerializer extends JsonSerializer<Coordinate> {
 
     @Override
     public void serialize(Coordinate value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        var pos = new double[]{value.getLatitude(), value.getLongitude()};
+        // Return as [lng, lat] to match MapLibre's ordering (lol)
+        var pos = new double[]{value.getLongitude(), value.getLatitude()};
         gen.writeArray(pos, 0, pos.length);
     }
 }

@@ -36,6 +36,7 @@ export namespace V1 {
 
   export interface Route {
     distance: number;
-    points: number[][]; // an array of 2-element arrays representing [lat, lng]
+    path: [number, number][]; // an array of 2-element arrays representing [lat, lng]
+    destination: Destination;
   }
 }

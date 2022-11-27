@@ -1,17 +1,19 @@
 package campuspath.app.entity.runtime;
 
+import campuspath.app.entity.Destination;
+import campuspath.app.entity.Views;
 import campuspath.util.Coordinate;
+import com.fasterxml.jackson.annotation.JsonView;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
  * @author Brady
  */
-public record Route(double distance, List<Coordinate> path) {
-
-    public Route(double distance, List<Coordinate> path) {
-        this.distance = distance;
-        this.path = Collections.unmodifiableList(path);
-    }
+//@formatter:off
+public record Route(
+        @JsonView(Views.APIMinimal.class) double            distance,
+        @JsonView(Views.APIMinimal.class) List<Coordinate>  path,
+        @JsonView(Views.APIMinimal.class) Destination       destination) {
+//@formatter:on
 }

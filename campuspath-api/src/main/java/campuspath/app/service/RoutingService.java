@@ -63,10 +63,10 @@ public final class RoutingService {
         ;
 
         // noinspection unchecked
-        return route(closest, CompositeHeuristic.of(heuristics), CompositeGoal.of(goals));
+        return route(destination, closest, CompositeHeuristic.of(heuristics), CompositeGoal.of(goals));
     }
 
-    private Route route(Location source, HeuristicFunction<LocationNode> heuristic, GoalFunction<LocationNode> goal) {
+    private Route route(Destination destination, Location source, HeuristicFunction<LocationNode> heuristic, GoalFunction<LocationNode> goal) {
         // Scuffed caching let's goooo
         var nodes = new HashMap<Location, LocationNode>();
         Function<Location, LocationNode> nodeFor
@@ -91,7 +91,7 @@ public final class RoutingService {
                     .map(node -> node.location)
                     .map(loc -> (Coordinate) loc) // down-cast
                     .toList();
-            return new Route(distance, points);
+            return new Route(distance, points, destination);
         }).orElse(null);
     }
 

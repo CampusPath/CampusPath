@@ -6,21 +6,11 @@ import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 import { V1 } from './search';
 
-//we probably should have named coords-instance "instances"
-//then put all of our data instances in it huh
-import { ROUTE } from './coords-instance';
-
 @Injectable({providedIn: 'root'})
 export class APIService {
 
   constructor(private http: HttpClient,
               private messageService: MessageService) {
-  }
-
-  //getter for route, idk if this updates or not but it gives access to route.ts and stuff
-  getRoute(): Observable<V1.Route> {
-    const route = of(ROUTE);
-    return route;
   }
 
   /**
@@ -64,7 +54,7 @@ export class APIService {
    */
   route(lat: number, lng: number, destination: string) {
     return this.http.post<V1.Route>(`${environment.apiURL}/v1/route`, {
-      location: [lat, lng],
+      location: [lng, lat],
       destination: destination
     });
   }

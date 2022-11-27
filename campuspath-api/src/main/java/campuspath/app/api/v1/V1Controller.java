@@ -3,6 +3,7 @@ package campuspath.app.api.v1;
 import campuspath.app.api.v1.request.RouteBody;
 import campuspath.app.entity.Campus;
 import campuspath.app.entity.Destination;
+import campuspath.app.entity.Views;
 import campuspath.app.entity.runtime.Route;
 import campuspath.app.service.CampusService;
 import campuspath.app.service.DestinationService;
@@ -52,12 +53,13 @@ public final class V1Controller {
     }
 
     @GetMapping("/search/{campusId}")
-    @JsonView(Destination.Query.class)
+    @JsonView(Views.APIMinimal.class)
     public Set<Destination> search(@PathVariable final UUID campusId, @RequestParam("q") final String query) {
         return this.destinations.lookup(campusId, query);
     }
 
     @PostMapping("/route")
+    @JsonView(Views.APIMinimal.class)
     public Route route(@RequestBody final RouteBody body) {
         return this.destinations.getById(body.destination())
                 .map(destination -> this.routing.route(body.location(), destination))

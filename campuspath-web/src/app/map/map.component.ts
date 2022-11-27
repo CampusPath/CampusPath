@@ -1,21 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Map, GeolocateControl } from 'maplibre-gl';
+import { Map, GeolocateControl, GeoJSONSource, LngLatBounds } from 'maplibre-gl';
 
-import { Coords } from '../coords';
 import { APIService } from '../api-service.service';
 import { V1 } from '../search';
-
-/*
-TODO:
-  Route service,
-    done kinda
-  User position service,
-    done
-  Check user position against route
-    done
-  Embedd this into the map
-    uhhhhh
-*/
+import { Feature, LineString } from 'geojson';
 
 @Component({
   selector: 'app-map',
@@ -25,28 +13,26 @@ TODO:
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   map: Map | undefined;
 
-  //variables for routing
-  route: V1.Route = {distance: 0, points: []};
-  dest: V1.Destination | undefined;
-  userCoords: Coords = {lat: 0, lng: 0};
-  counter: number = 0;
-
-  //instance of the coords interface initially set to {0, 0}
-  coords: Coords = {lat: 0, lng: 0};
-
-  constructor(private apiService: APIService) { }
+  // Dynamic routing stuff
+  activeRoute: V1.Route | undefined;
+  userCoords: GeolocationCoordinates | undefined;
+  routeLineData: Feature<LineString>;
 
   @ViewChild('map')
   private mapContainer!: ElementRef<HTMLElement>;
 
-  //overwrite the coords instance with getUserCoords on instantiation
-  ngOnInit(): void{
-    this.getRoute();
+  constructor(private apiService: APIService) {
+    this.routeLineData = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'LineString',
+        coordinates: []
+      }
+    }
   }
 
-  getRoute(): void {
-    this.apiService.getRoute().subscribe(route => this.route = route);
-  }
+  ngOnInit(): void{}
 
   //display the map
   ngAfterViewInit() {
@@ -69,44 +55,34 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     // Setup relevant event callbacks
-    geolocate.on('trackuserlocationstart', () => {
-      console.log('Enabled Tracking');
-    });
     geolocate.on('trackuserlocationend', () => {
-      console.log('Disabled Tracking');
+      this.userCoords = undefined;
     });
     geolocate.on('geolocate', (position: GeolocationPosition) => {
-      console.log('New position: ' + position.coords.toString());
+      this.userCoords = position.coords;
+      // TODO: Check user position against route
     });
     // Add the control and request the user's location upon map load
     this.map.addControl(geolocate);
-    this.map.on('load', () => geolocate.trigger());
-
-    // TODO: Add user position listener to call addSource and addLayer when user location changes.
-    this.map.addSource('route', {
-      'type': 'geojson',
-      'data': {
-        'type': 'Feature',
-        'properties': {},
-        'geometry': {
-          'type': 'LineString',
-          'coordinates': this.updateRoute()
+    this.map.on('load', () => {
+      this.map?.addSource('route', {
+        'type': 'geojson',
+        'data': this.routeLineData
+      });
+      this.map?.addLayer({
+        'id': 'route',
+        'type': 'line',
+        'source': 'route',
+        'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-color': '#002f6c',
+          'line-width': 6
         }
-      }
-    });
-
-    this.map.addLayer({
-      'id': 'route',
-      'type': 'line',
-      'source': 'route',
-      'layout': {
-        'line-join': 'round',
-        'line-cap': 'round'
-      },
-      'paint': {
-        'line-color': '#888',
-        'line-width': 8
-      }
+      });
+      geolocate.trigger();
     });
   }
 
@@ -115,8 +91,29 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.map?.remove();
   }
 
-  onRoute(route: V1.Route): void {
-    // TODO: Render route
+  routeTo(dest: string): void {
+    if (this.userCoords === undefined) {
+      // TODO: ERROR: User location not available, can't route
+      return;
+    }
+    // TODO: Select Destination => Acquire Direction => Go! Route
+    this.apiService.route(this.userCoords?.latitude, this.userCoords?.longitude, dest).subscribe((route: V1.Route) => {
+      this.activeRoute = route;
+      let coords = this.activeRoute.path;
+      this.routeLineData.geometry.coordinates = coords;
+
+      // Fit the screen to the route
+      let bounds = this.activeRoute.path.reduce((bounds: LngLatBounds, coord: [number, number]) => {
+        return bounds.extend(coord);
+      }, new LngLatBounds(coords[0], coords[0]));
+
+      this.map?.fitBounds(bounds, {
+        padding: 50
+      });
+
+      // Update the line
+      (this.map?.getSource('route') as GeoJSONSource).setData(this.routeLineData);
+    });
   }
 
   /*
@@ -130,6 +127,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
       NOTE counter will need to be reset whenever there is a new end destination
     */
+  /*
+
+  //variables for routing
+  route: V1.Route = {distance: 0, points: []};
+  dest: V1.Destination | undefined;
+  userCoords: Coords = {lat: 0, lng: 0};
+  counter: number = 0;
+
+  //instance of the coords interface initially set to {0, 0}
+  coords: Coords = {lat: 0, lng: 0};
+
   updateRoute(): number[][] {
     if(this.userIsNear(this.route?.points[this.counter][0],
       this.route?.points[this.counter][1])) {
@@ -158,4 +166,5 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
     return ((latDiff <= this.latThresh) && (lngDiff <= this.lngThresh));
   }
+   */
 }

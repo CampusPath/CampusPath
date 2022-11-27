@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { APIService } from '../api-service.service';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class SearchBarComponent implements OnInit {
   destination$!: Observable<V1.Destination[]>;
   private searchTerms = new Subject<string>();
 
-  @Output() routeEvent = new EventEmitter<V1.Route>();
+  @Output() routeEvent = new EventEmitter<string>();
 
   constructor(private apiService: APIService) {}
 
@@ -43,5 +43,10 @@ export class SearchBarComponent implements OnInit {
 
   selectDestination(dest: V1.Destination): void {
     // TODO: Prompt "Go"!
+    //  For now this just triggers routing directly
+
+    // Clear destination list and route
+    this.destination$ = of([]);
+    this.routeEvent.emit(dest.id);
   }
 }
