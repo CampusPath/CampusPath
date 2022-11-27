@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { APIService } from '../api-service.service';
 
 import { Observable, Subject } from 'rxjs';
@@ -9,8 +9,6 @@ import {
 import { V1 } from '../search';
 
 import { environment } from 'src/environments/environment';
-import { COORDS } from '../coords-instance';
-
 
 @Component({
   selector: 'app-search-bar',
@@ -22,6 +20,7 @@ export class SearchBarComponent implements OnInit {
   destination$!: Observable<V1.Destination[]>;
   private searchTerms = new Subject<string>();
 
+  @Output() routeEvent = new EventEmitter<V1.Route>();
 
   constructor(private apiService: APIService) {}
 
@@ -42,5 +41,7 @@ export class SearchBarComponent implements OnInit {
     );
   }
 
-
+  selectDestination(dest: V1.Destination): void {
+    // TODO: Prompt "Go"!
+  }
 }

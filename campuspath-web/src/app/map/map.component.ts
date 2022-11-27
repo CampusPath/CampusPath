@@ -115,6 +115,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.map?.remove();
   }
 
+  onRoute(route: V1.Route): void {
+    // TODO: Render route
+  }
+
   /*
       1. Check if the user is close enough to route[counter]
         a. if yes, "remove" route[counter] by ++counter

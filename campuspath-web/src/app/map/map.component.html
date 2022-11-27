@@ -2,7 +2,7 @@
 <nav>
   <button routerLink="/">Home</button>
 </nav>
-<app-search-bar></app-search-bar>
+<app-search-bar (routeEvent)="onRoute($event)"></app-search-bar>
 <div class="map-wrap">
   <a href="https://www.maptiler.com" class="watermark">
     <img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"/>
