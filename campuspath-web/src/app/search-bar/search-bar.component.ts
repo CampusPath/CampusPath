@@ -40,7 +40,8 @@ export class SearchBarComponent implements OnInit {
   }
 
 /*
-TODO: Take building label and grab coordinates and send it to api service to get back
+TODO: Take building label and grab coordinates and send it to api service to get back list of nodes and assign it to 2d array 
+for map component
 */
   sendBuildingLabel(buildingLabel){
 
