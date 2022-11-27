@@ -50,13 +50,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //display the map
   ngAfterViewInit() {
-    const initialState = {lng: -95.252963, lat: 32.315867, zoom: 14};
-
+    // TODO: Fetch initial coords from the campusId via apiService.getCampus(...)
     this.map = new Map({
       container: this.mapContainer.nativeElement,
       style: `https://api.maptiler.com/maps/streets/style.json?key=HfAVSwePVPgGxhY1Yvjw`,
-      center: [initialState.lng, initialState.lat],
-      zoom: initialState.zoom
+      center: [-95.251963, 32.315867],
+      zoom: 16,
+      pitch: 45
     });
 
     let geolocate = new GeolocateControl({
