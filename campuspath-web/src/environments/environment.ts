@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'http://localhost:8080/api/',
+  apiURL: 'http://localhost:8080/api',
   // Temporary hardcoded UT Tyler Campus ID
   defaultCampusID: '5c3778f2-aa14-4395-895f-d1959f8d4087'
 };
