@@ -1,23 +1,10 @@
 @import '~maplibre-gl/dist/maplibre-gl.css';
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
+html, body {
+  font-family: Lato, sans-serif;
 }
 
-h2, h3 {
-  color: #444;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: lighter;
-}
-body {
-  margin: 2em;
-}
-body, input[type="text"], button {
-  color: #333;
-  font-family: Cambria, Georgia, serif;
-}
 button {
   background-color: #eee;
   border: none;
@@ -30,17 +17,15 @@ button {
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
+
 button:hover {
   background-color: black;
   color: white;
 }
+
 button:disabled {
   background-color: #eee;
   color: #aaa;
   cursor: auto;
 }
 
-/* everywhere else */
-* {
-  font-family: Arial, Helvetica, sans-serif;
-}
