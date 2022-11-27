@@ -22,5 +22,5 @@ public interface DestinationRepository extends JpaRepository<Destination, UUID> 
     Set<Destination> findAllMatching(UUID campusId, String partialTitle);
 
     @Query
-    Set<Destination> findAllMatchingAbbr(UUID campusId, String abbr);
+    Set<Destination> findByCampusEqualsAndAbbreviationEquals(UUID campusId, String abbr);
 }

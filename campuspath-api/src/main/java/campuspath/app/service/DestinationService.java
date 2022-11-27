@@ -39,12 +39,12 @@ public final class DestinationService {
 
         if (query.length() > 3) {
             String abbr = query.replaceAll("\\B.|\\P{L}", "").toUpperCase();
-            abbrSearch = this.repo.findAllMatchingAbbr(campusId, abbr);
+            abbrSearch = this.repo.findByCampusEqualsAndAbbreviationEquals(campusId, abbr);
         } else {
-            abbrSearch = this.repo.findAllMatchingAbbr(campusId, query);
+            abbrSearch = this.repo.findByCampusEqualsAndAbbreviationEquals(campusId, query);
         }
 
         // Join all the queries
-        return Sets.union(contains, matching, abbrSearch);
+        return Sets.union(Sets.union(contains, matching), abbrSearch);
     }
 }
