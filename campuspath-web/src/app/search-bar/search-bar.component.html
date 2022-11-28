@@ -1,13 +1,9 @@
-<div>
-  <label>Search Bar</label>
-  <input #searchBox id="search-text" placeholder="Search for a building... ex: RBN" (input)="search(searchBox.value)" />
- <!-- <button (click)="search()">Search</button>-->
-
- <ul class="search-result">
-  <li *ngFor="let dest of destination$ | async" >
-    <button (click)="open(dest)">
-      {{dest.name}}
-    </button>
-  </li>
-</ul>
+<input #searchBox
+       id="search-text"
+       placeholder="&#xF002; Search for a building... ex: RBN"
+       (input)="search(searchBox.value)"/>
+<div class="search-result">
+  <a *ngFor="let dest of destination$ | async" (click)="open(dest)">
+    {{dest.name}}
+  </a>
 </div>

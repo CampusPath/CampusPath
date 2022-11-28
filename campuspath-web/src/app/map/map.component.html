@@ -1,10 +1,9 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<nav>
-  <button routerLink="/">Home</button>
-</nav>
-<app-search-bar (routeEvent)="routeTo($event)"></app-search-bar>
-<!--FIXME: Make the map not go off of the screen -->
-<div class="map-wrap">
+<div id="map-root">
+  <nav>
+    <button routerLink="/">Home</button>
+    <app-search-bar (routeEvent)="routeTo($event)"></app-search-bar>
+  </nav>
+  <!--FIXME: Make the map not go off of the screen -->
   <a href="https://www.maptiler.com" class="watermark">
     <img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"/>
   </a>
