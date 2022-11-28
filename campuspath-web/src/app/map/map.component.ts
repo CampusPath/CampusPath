@@ -62,7 +62,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       fitBoundsOptions: {
         maxZoom: 18
       },
-      trackUserLocation: true
+      trackUserLocation: true,
+      showAccuracyCircle: false
     });
 
     // Setup relevant event callbacks
