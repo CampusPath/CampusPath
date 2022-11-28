@@ -63,7 +63,7 @@ export class SearchBarComponent implements OnInit {
 
 }
 
-//this should probably be moved to a different class, but its here for right now cause uhhh dont worry about it
+// FIXME: this should probably be moved to a different class, but its here for right now cause uhhh dont worry about it
 @Component({
   selector: 'search-modal-content',
   templateUrl:'./search-modal-content.html',
