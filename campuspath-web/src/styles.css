@@ -8,17 +8,17 @@ html, body {
 }
 
 button {
-  background-color: #eee;
+  background-color: #72a4d4;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  color: black;
+  color: white;
   font-size: 1.2rem;
   padding: 1rem;
 }
 
 button:hover {
-  background-color: black;
+  background-color: #26527c;
   color: white;
 }
 
