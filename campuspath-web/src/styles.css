@@ -1,5 +1,6 @@
 @import '~maplibre-gl/dist/maplibre-gl.css';
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
 html, body {
   font-family: Lato, sans-serif;

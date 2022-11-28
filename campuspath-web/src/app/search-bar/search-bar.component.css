@@ -8,17 +8,19 @@ input {
 }
 
 .search-result {
-  display: none;
   position: absolute;
   background-color: #f6f6f6;
   border: 1px solid #ddd;
   z-index: 10;
-  width: 100px;
+  margin-right: 10px; /* FIXME: THIS IS A HACK */
+  width: inherit;
+  float: left;
 }
 
 .search-result a {
   cursor: pointer;
   display: block;
+  padding: 15px;
 }
 
 .search-result a:hover {
