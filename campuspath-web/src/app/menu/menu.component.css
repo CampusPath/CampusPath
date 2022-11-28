@@ -3,7 +3,7 @@ h1 {
   padding: 20px;
   background-color: white;
   font-size: 3rem;
-  color: #065b64;
+  color: #72a4d4;
   font-weight: bold;
 }
 
@@ -47,7 +47,6 @@ h1 {
 button {
   padding: 30px;
   font-size: 2rem;
-  background: #065b64;
   width: 100%;
   border: none;
   border-radius: 10px;
