@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Ben
@@ -21,5 +22,9 @@ public final class LocationService {
 
     public List<Location> lookup() {
         return this.repo.findAll();
+    }
+
+    public List<UUID[]> getAdjacency() {
+        return this.repo.getAdjacency();
     }
 }

@@ -18,7 +18,7 @@ import campuspath.util.Coordinate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -33,15 +33,28 @@ public final class RoutingService {
 
     private final LocationService locations;
     private final NearestNeighbor nearestNeighbor;
+    private final Map<UUID, Location> allNodes;
+    private final Map<UUID, Set<UUID>> allAdjacent;
 
     public RoutingService(@Autowired LocationService locations) {
         this.locations = locations;
+
+        this.allNodes = new HashMap<>();
+        for (var loc : this.locations.lookup()) {
+            this.allNodes.put(loc.getId(), loc);
+        }
+
+        this.allAdjacent = new HashMap<>();
+        for (var pair : this.locations.getAdjacency()) {
+            this.allAdjacent.computeIfAbsent(pair[0], __ -> new HashSet<>()).add(pair[1]);
+        }
+
         // TODO: Replace brute-force impl with log(n) algorithm
         this.nearestNeighbor = new NearestNeighborBrute() {
 
             @Override
             public Stream<Location> getAll() {
-                return RoutingService.this.locations.lookup().stream();
+                return RoutingService.this.allNodes.values().stream();
             }
         };
     }
@@ -76,7 +89,8 @@ public final class RoutingService {
         var pathfinder = new AStarPathfinder<>(
                 new BinaryHeapOpenSet<>(LocationNode[]::new),
                 start,
-                src -> src.location.getAdjacent().stream()
+                src -> this.allAdjacent.getOrDefault(src.location.getId(), Set.of()).stream()
+                        .map(allNodes::get)
                         .map(nodeFor)
                         .map(dest -> new LocationNodeMove(src, dest, src.location.distance(dest.location)))
                         .toArray(LocationNodeMove[]::new),
