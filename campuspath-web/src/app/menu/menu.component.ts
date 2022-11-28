@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-menu',
@@ -7,13 +6,9 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  title = 'CampusPath';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-    
-
-  }
-   
-
+  ngOnInit(): void {}
 }

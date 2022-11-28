@@ -1,3 +1,12 @@
+h1 {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  font-size: 3rem;
+  color: #065b64;
+  font-weight: bold;
+}
+
 #background {
   width: 100%;
   height: 100%;
