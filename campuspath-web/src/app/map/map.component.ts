@@ -67,9 +67,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     // Setup relevant event callbacks
-    geolocate.on('trackuserlocationend', () => {
-      this.userCoords = undefined;
-    });
     geolocate.on('geolocate', (position: GeolocationPosition) => {
       this.userCoords = position.coords;
       this.updateRoute();
