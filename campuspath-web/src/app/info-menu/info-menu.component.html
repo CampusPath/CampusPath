@@ -1,9 +1,17 @@
-<app-info-popup></app-info-popup>
-<br>
-<app-privacy-popup></app-privacy-popup>
-<br>
-<app-about-us-popup></app-about-us-popup>
-<br>
-<nav>
-  <button routerLink="/">Back</button>
-</nav>
+<link rel="stylesheet" href="info-menu.component.css">
+<div class="info-buttons-parent">
+  <div class="how-to-use">
+    <app-info-popup></app-info-popup>
+  </div>
+  <div class="privacy">
+    <app-privacy-popup></app-privacy-popup>
+  </div>
+  <div class="about-us">
+    <app-about-us-popup></app-about-us-popup>
+  </div>
+</div>
+<div class="info-back">
+  <nav>
+    <button routerLink="/">Back</button>
+  </nav>
+</div>
