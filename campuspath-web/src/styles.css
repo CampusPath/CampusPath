@@ -28,3 +28,7 @@ button:disabled {
   cursor: auto;
 }
 
+/* Disables location pulsing */
+.maplibregl-user-location-dot::before {
+  animation: none;
+}
