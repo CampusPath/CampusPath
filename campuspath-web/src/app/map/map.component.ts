@@ -4,6 +4,8 @@ import { GeoJSONSource, GeolocateControl, LngLatBounds, Map } from 'maplibre-gl'
 import { APIService } from '../api-service.service';
 import { LngLat, V1 } from '../search';
 import { Feature, LineString } from 'geojson';
+import { environment } from '../../environments/environment';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -35,13 +37,18 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  //display the map
-  ngAfterViewInit() {
-    // TODO: Fetch initial coords from the campusId via apiService.getCampus(...)
+  // display the map
+  async ngAfterViewInit() {
+    let campus = await firstValueFrom(this.apiService.getCampus(environment.defaultCampusID));
+
     this.map = new Map({
       container: this.mapContainer.nativeElement,
-      style: `https://api.maptiler.com/maps/streets/style.json?key=HfAVSwePVPgGxhY1Yvjw`,
-      center: [-95.251963, 32.315867],
+      // TODO: Proxy
+      style: `https://api.maptiler.com/maps/streets/style.json?key=${environment.maptilerKey}`,
+      center: [
+        (campus.maxLng + campus.minLng) / 2,
+        (campus.maxLat + campus.minLat) / 2
+      ],
       zoom: 16,
       pitch: 45
     });
