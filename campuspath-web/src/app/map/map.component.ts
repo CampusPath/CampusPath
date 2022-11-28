@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Map, GeolocateControl, GeoJSONSource, LngLatBounds } from 'maplibre-gl';
+import { GeoJSONSource, GeolocateControl, LngLatBounds, Map } from 'maplibre-gl';
 
 import { APIService } from '../api-service.service';
-import { V1 } from '../search';
+import { LngLat, V1 } from '../search';
 import { Feature, LineString } from 'geojson';
 
 @Component({
@@ -14,7 +14,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   map: Map | undefined;
 
   // Dynamic routing stuff
-  activeRoute: V1.Route | undefined;
+  route: V1.Route | undefined;
   userCoords: GeolocationCoordinates | undefined;
   routeLineData: Feature<LineString>;
 
@@ -29,10 +29,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         type: 'LineString',
         coordinates: []
       }
-    }
+    };
   }
 
-  ngOnInit(): void{}
+  ngOnInit(): void {
+  }
 
   //display the map
   ngAfterViewInit() {
@@ -60,7 +61,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     geolocate.on('geolocate', (position: GeolocationPosition) => {
       this.userCoords = position.coords;
-      // TODO: Check user position against route
+      this.updateRoute();
     });
     // Add the control and request the user's location upon map load
     this.map.addControl(geolocate);
@@ -78,7 +79,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
           'line-cap': 'round'
         },
         'paint': {
-          'line-color': '#002f6c',
+          'line-color': '#3399ff',
           'line-width': 6
         }
       });
@@ -98,12 +99,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     // TODO: Select Destination => Acquire Direction => Go! Route
     this.apiService.route(this.userCoords?.latitude, this.userCoords?.longitude, dest).subscribe((route: V1.Route) => {
-      this.activeRoute = route;
-      let coords = this.activeRoute.path;
-      this.routeLineData.geometry.coordinates = coords;
+      this.route = route;
+      let coords = this.route.path;
 
       // Fit the screen to the route
-      let bounds = this.activeRoute.path.reduce((bounds: LngLatBounds, coord: [number, number]) => {
+      let bounds = this.route.path.reduce((bounds: LngLatBounds, coord: LngLat) => {
         return bounds.extend(coord);
       }, new LngLatBounds(coords[0], coords[0]));
 
@@ -112,11 +112,33 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
       // Update the line
-      (this.map?.getSource('route') as GeoJSONSource).setData(this.routeLineData);
+      this.redrawPath(coords);
     });
   }
 
+  redrawPath(coords: LngLat[]): void {
+    this.routeLineData.geometry.coordinates = coords;
+    (this.map?.getSource('route') as GeoJSONSource).setData(this.routeLineData);
+  }
+
+  // check if |user.lat - param lat| and |user.lng - param lng| are within some nearness threshold
+  // this will need tweaking
+  // 0.0001 roughly equals 11.1 meters, so this will have about 22.2 meters leeway
+  // might be too much or too little, itll have to be tested
+  latThresh: number = 0.00005;
+  lngThresh: number = 0.00005;
+
+  userIsNear(pos: LngLat): boolean {
+    if (this.userCoords === undefined) {
+      return false;
+    }
+    let lngDiff = Math.abs(this.userCoords.longitude - pos[0]);
+    let latDiff = Math.abs(this.userCoords.latitude - pos[1]);
+    return ((latDiff <= this.latThresh) && (lngDiff <= this.lngThresh));
+  }
+
   /*
+    ETHAN'S OLD NOTES:::
       1. Check if the user is close enough to route[counter]
         a. if yes, "remove" route[counter] by ++counter
         b. else skip if statement
@@ -127,44 +149,18 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
       NOTE counter will need to be reset whenever there is a new end destination
     */
-  /*
-
-  //variables for routing
-  route: V1.Route = {distance: 0, points: []};
-  dest: V1.Destination | undefined;
-  userCoords: Coords = {lat: 0, lng: 0};
-  counter: number = 0;
-
-  //instance of the coords interface initially set to {0, 0}
-  coords: Coords = {lat: 0, lng: 0};
-
-  updateRoute(): number[][] {
-    if(this.userIsNear(this.route?.points[this.counter][0],
-      this.route?.points[this.counter][1])) {
-      this.counter++;
+  updateRoute() {
+    if (this.userCoords === undefined || this.route === undefined) {
+      return;
     }
 
-    let updatedPoints: number[][] = [];
-    updatedPoints.push([this.userCoords.lat, this.userCoords.lng]);
-
-    for(let i = this.counter; i < this.route.points.length; i++) {
-      updatedPoints.push([this.route.points[i][0], this.route.points[i][1]]);
+    // TODO: Implement some sort of re-routing threshold
+    if (!this.userIsNear(this.route.path[1])) {
+      return;
     }
 
-    return updatedPoints;
+    // Remove the head and redraw the path
+    this.route.path.shift();
+    this.redrawPath(this.route.path);
   }
-
-  //check if |user.lat - param lat| and |user.lng - param lng| are within some nearness threshold
-  //this will need tweaking
-  //0.0001 roughly equals 11.1 meters, so this will have about 22.2 meters leeway
-  //might be too much or too little, itll have to be tested
-  latThresh: number = 0.0001;
-  lngThresh: number = 0.0001;
-  userIsNear(lat: number, lng: number): boolean {
-    let latDiff = Math.abs(this.userCoords.lat - lat);
-    let lngDiff = Math.abs(this.userCoords.lng - lng);
-
-    return ((latDiff <= this.latThresh) && (lngDiff <= this.lngThresh));
-  }
-   */
 }
