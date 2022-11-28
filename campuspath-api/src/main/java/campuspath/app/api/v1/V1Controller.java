@@ -22,9 +22,6 @@ import java.util.UUID;
  * @author Brady
  */
 @RestController
-@CrossOrigin(origins = {
-        "http://localhost:4200" // Angular Dev
-})
 @RequestMapping("/api/v1")
 public final class V1Controller {
 

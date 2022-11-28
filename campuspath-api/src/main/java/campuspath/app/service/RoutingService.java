@@ -60,7 +60,6 @@ public final class RoutingService {
         var goals = destinations.stream()
                 .map(loc -> (GoalFunction<LocationNode>) node -> node.location.getId().equals(loc.getId()))
                 .toArray(GoalFunction[]::new);
-        ;
 
         // noinspection unchecked
         return route(destination, closest, CompositeHeuristic.of(heuristics), CompositeGoal.of(goals));
