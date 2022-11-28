@@ -41,16 +41,12 @@ export class SearchBarComponent implements AfterViewInit {
     modalRef.componentInstance.destName = dest.name;
     modalRef.componentInstance.onGoPressed.subscribe(
       () => {
-        this.selectDestination(dest);
+        this.routeTo(dest);
       }
     );
   }
 
-  selectDestination(dest: V1.Destination): void {
-    // TODO: Prompt "Go"!
-    //  For now this just triggers routing directly
-
-    // Clear destination list and route
+  routeTo(dest: V1.Destination): void {
     this.initSearchService();
     this.routeEvent.emit(dest.id);
   }
