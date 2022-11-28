@@ -36,7 +36,7 @@ export class APIService {
    * @param query    A user query string for a destination
    */
   search(campusId: string, query: string) {
-    return this.http.get<V1.Destination[]>(`${environment.apiURL}/v1/search/${campusId}?q=${query}`);
+    return this.http.get<V1.Destination[]>(`${environment.apiURL}/v1/search/${campusId}?q=${encodeURIComponent(query)}`);
     /*
     .pipe(
       tap(_ => this.log(`found buildings matching "${search}"`)),

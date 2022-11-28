@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { APIService } from '../api-service.service';
 
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
@@ -16,10 +16,13 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css']
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent implements AfterViewInit {
   //Variable that stores the text the user enters into the search bar
   destination$!: Observable<V1.Destination[]>;
   private searchTerms = new Subject<string>();
+
+  @ViewChild('searchBox')
+  private searchBox!: ElementRef<HTMLInputElement>;
 
   @Output() routeEvent = new EventEmitter<string>();
 
@@ -29,17 +32,8 @@ export class SearchBarComponent implements OnInit {
     this.searchTerms.next(term);
   }
 
-  ngOnInit(): void {
-    this.destination$ = this.searchTerms.pipe(
-      // wait 300ms after each keystroke before considering the term
-      debounceTime(300),
-
-      // ignore new term if same as previous term
-      distinctUntilChanged(),
-
-      // switch to new search observable each time the term changes
-      switchMap((term: string) => this.apiService.search(environment.defaultCampusID, term)),
-    );
+  ngAfterViewInit(): void {
+    this.initSearchService();
   }
 
   open(dest: V1.Destination) {
@@ -57,10 +51,23 @@ export class SearchBarComponent implements OnInit {
     //  For now this just triggers routing directly
 
     // Clear destination list and route
-    this.destination$ = of([]);
+    this.initSearchService();
     this.routeEvent.emit(dest.id);
   }
 
+  initSearchService() {
+    this.searchBox.nativeElement.value = '';
+    this.destination$ = this.searchTerms.pipe(
+      // wait 300ms after each keystroke before considering the term
+      debounceTime(300),
+
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
+
+      // switch to new search observable each time the term changes
+      switchMap((term: string) => this.apiService.search(environment.defaultCampusID, term)),
+    );
+  }
 }
 
 // FIXME: this should probably be moved to a different class, but its here for right now cause uhhh dont worry about it
