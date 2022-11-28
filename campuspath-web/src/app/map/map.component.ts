@@ -137,18 +137,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     return ((latDiff <= this.latThresh) && (lngDiff <= this.lngThresh));
   }
 
-  /*
-    ETHAN'S OLD NOTES:::
-      1. Check if the user is close enough to route[counter]
-        a. if yes, "remove" route[counter] by ++counter
-        b. else skip if statement
-      2. Create a temp route variable
-      3. Add the user as the first point
-      4. Add all points after route[counter] from route
-      5. Return the newly updated route as a number[][]
-
-      NOTE counter will need to be reset whenever there is a new end destination
-    */
   updateRoute() {
     if (this.userCoords === undefined || this.route === undefined) {
       return;
