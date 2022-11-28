@@ -76,5 +76,6 @@ export class SearchModalContent {
 
   goPressed() {
     this.onGoPressed.emit();
+    this.activeModal.dismiss('Go click');
   }
 }
