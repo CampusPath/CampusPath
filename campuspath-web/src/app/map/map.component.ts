@@ -59,6 +59,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         maximumAge: 30000,
         timeout: 27000
       },
+      fitBoundsOptions: {
+        maxZoom: 18
+      },
       trackUserLocation: true
     });
 
