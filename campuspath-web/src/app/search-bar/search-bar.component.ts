@@ -10,6 +10,7 @@ import { V1 } from '../search';
 
 import { environment } from 'src/environments/environment';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ArrivalPopupComponent } from '../arrival-popup/arrival-popup.component';
 
 @Component({
   selector: 'app-search-bar',
@@ -44,6 +45,12 @@ export class SearchBarComponent implements AfterViewInit {
         this.routeTo(dest);
       }
     );
+  }
+
+  //opens the arrival modal, needs to be called when the user reaches the last node in the path
+  openArrivalScreen(dest: V1.Destination) {
+    const modalRef = this.modalService.open(ArrivalPopupComponent);
+    modalRef.componentInstance.destName = dest.name;
   }
 
   routeTo(dest: V1.Destination): void {

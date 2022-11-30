@@ -15,6 +15,7 @@ import { InfoPopupComponent } from './info-popup/info-popup.component';
 import { PrivacyPopupComponent } from './privacy-popup/privacy-popup.component';
 import { AboutUsPopupComponent } from './about-us-popup/about-us-popup.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { ArrivalPopupComponent } from './arrival-popup/arrival-popup.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     InfoPopupComponent,
     PrivacyPopupComponent,
     AboutUsPopupComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ArrivalPopupComponent
   ],
   imports: [
     BrowserModule,
