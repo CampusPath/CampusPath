@@ -3,8 +3,6 @@ package campuspath.app.service;
 import campuspath.app.entity.Destination;
 import campuspath.app.entity.Location;
 import campuspath.app.entity.runtime.Route;
-import campuspath.nearestneighbor.NearestNeighbor;
-import campuspath.nearestneighbor.brute.NearestNeighborBrute;
 import campuspath.pathfind.algorithm.astar.AStarPathfinder;
 import campuspath.pathfind.algorithm.astar.AbstractAStarNode;
 import campuspath.pathfind.algorithm.astar.set.BinaryHeapNode;
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 /**
  * FIXME: This impl is all-around inefficient and could be done a lot better,
@@ -32,22 +29,13 @@ import java.util.stream.Stream;
 public final class RoutingService {
 
     private final LocationService locations;
-    private final NearestNeighbor nearestNeighbor;
 
     public RoutingService(@Autowired LocationService locations) {
         this.locations = locations;
-        // TODO: Replace brute-force impl with log(n) algorithm
-        this.nearestNeighbor = new NearestNeighborBrute() {
-
-            @Override
-            public Stream<Location> getAll() {
-                return RoutingService.this.locations.lookup().stream();
-            }
-        };
     }
 
     public Route route(Coordinate source, Destination destination) {
-        var closest = this.nearestNeighbor.findNearest(source);
+        var closest = this.locations.findNearest(source);
 
         // Create composite functions
         var destinations = destination.getLocations();
