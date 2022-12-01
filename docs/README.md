@@ -29,9 +29,10 @@ gradlew campuspath-api:bootRun
 
 ### Starting Development Server
 
-If you already have NPM and Angular CLI installed, running the following command will work:
+If you already have NPM and Angular CLI installed, running the following commands will work:
 
 ```
+cd campuspath-web
 ng serve
 ```
 
