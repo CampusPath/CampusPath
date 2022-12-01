@@ -1,7 +1,5 @@
 # CampusPath Documentation
 
----
-
 ## Development Environment
 
 Before running any gradle tasks with the gradle wrapper, ensure that Java 17 (minimum)
@@ -17,8 +15,6 @@ Java HotSpot(TM) 64-Bit Server VM (build 18.0.2.1+1-1, mixed mode, sharing)
 If an unsupported Java version is not installed, the JDK installer is available from Oracle
 [here](https://www.oracle.com/java/technologies/downloads/).
 
----
-
 ## Server
 
 ### Starting Development Server
@@ -28,8 +24,6 @@ The server can be started using the gradlew wrapper script:
 ```
 gradlew campuspath-api:bootRun
 ```
-
----
 
 ## App
 
