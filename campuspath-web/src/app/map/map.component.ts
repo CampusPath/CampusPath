@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { GeoJSONSource, GeolocateControl, LngLatBounds, Map } from 'maplibre-gl';
 
 import { APIService } from '../api-service.service';
@@ -14,6 +14,8 @@ import { firstValueFrom } from 'rxjs';
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   map: Map | undefined;
+
+  @Output() arrivedEvent = new EventEmitter();
 
   // Dynamic routing stuff
   route: V1.Route | undefined;
@@ -148,6 +150,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   updateRoute() {
     if (this.userCoords === undefined || this.route === undefined) {
       return;
+    }
+
+    //check if user has arrived
+    if (this.userIsNear(this.route.path[0]) && this.route.path.length === 1) {
+      this.arrivedEvent.emit();
     }
 
     // TODO: Implement some sort of re-routing threshold

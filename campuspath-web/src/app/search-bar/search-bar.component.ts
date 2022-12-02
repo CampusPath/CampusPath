@@ -7,6 +7,7 @@ import {
 } from 'rxjs/operators';
 
 import { V1 } from '../search';
+import { MapComponent } from '../map/map.component';
 
 import { environment } from 'src/environments/environment';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -27,7 +28,11 @@ export class SearchBarComponent implements AfterViewInit {
 
   @Output() routeEvent = new EventEmitter<string>();
 
-  constructor(private apiService: APIService, private modalService: NgbModal) {}
+  constructor(private apiService: APIService, private modalService: NgbModal, mapComponent: MapComponent) {
+    mapComponent.arrivedEvent.subscribe(() => {
+      this.openArrivalScreen();
+    });
+  }
 
   search(term: string): void {
     this.searchTerms.next(term);
@@ -48,9 +53,9 @@ export class SearchBarComponent implements AfterViewInit {
   }
 
   //opens the arrival modal, needs to be called when the user reaches the last node in the path
-  openArrivalScreen(dest: V1.Destination) {
+  openArrivalScreen() {
     const modalRef = this.modalService.open(ArrivalPopupComponent);
-    modalRef.componentInstance.destName = dest.name;
+    //modalRef.componentInstance.destName = dest.name;
   }
 
   routeTo(dest: V1.Destination): void {
