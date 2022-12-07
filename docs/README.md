@@ -1,6 +1,22 @@
 # CampusPath Documentation
 
-## Development Environment
+## Interactive Development Environment
+
+**NOTE**: This guide currently covers the installation process for Windows. If you are on another
+operating system, the instructions in some steps may be insufficient or incomplete.
+
+### Overview
+
+The basic steps for setting up a fully local interactive development environment from a fresh
+installation are as follows:
+
+1. Install the JDK
+2. Install PostgreSQL
+3. Load the database
+4. Start the API Server
+5. Start the Web App
+
+### Install the JDK
 
 Before running any gradle tasks with the gradle wrapper, ensure that Java 17 (minimum)
 is on the path:
@@ -15,9 +31,46 @@ Java HotSpot(TM) 64-Bit Server VM (build 18.0.2.1+1-1, mixed mode, sharing)
 If an unsupported Java version is not installed, the JDK installer is available from Oracle
 [here](https://www.oracle.com/java/technologies/downloads/).
 
-## Server
+### Install PostgreSQL
 
-### Starting Development Server
+The installer packaged with pgAdmin can be found [here](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads).
+
+Download and run the installer, then click "next" through the menus while verifying the following:
+
+1) #### Ensure that "pgAdmin 4" is checked on the components screen
+   ![](assets/pgsql1.png)
+
+2) #### Set the superuser user password to "password".
+   ![](assets/pgsql2.png)
+   - This is NOT a required step if [application.properties](../campuspath-api/src/main/resources/application.properties)
+     is updated to reflect the desired value.
+
+3) #### Ensure that the server port is set to "5432" (the default value)
+   ![](assets/pgsql3.png)
+   - This is NOT a required step if [application.properties](../campuspath-api/src/main/resources/application.properties)
+     is updated to reflect the desired value.
+
+4) #### Don't launch StackBuilder on exit, it won't be required.
+   ![](assets/pgsql4.png)
+
+### Load the Database
+
+1) #### After installing PostgreSQL, launch "pgAdmin".
+   ![img.png](img.png)
+   If the application isn't searchable, the default installation path is:
+   `C:\Program Files\PostgreSQL\VERSION\pgAdmin 4\bin\pgAdmin4.exe`
+
+2) #### Enter the master user password if prompted, then create a new database:
+   ![img_1.png](img_1.png)
+   Set the name to "campuspath" and keep the rest of the settings the same 
+   ![img_2.png](img_2.png)
+
+3) #### Use "Restore" to load the database from file
+   ![img_3.png](img_3.png)
+   ![img_4.png](img_4.png)
+
+
+### Start the API Server
 
 The server can be started using the gradlew wrapper script:
 
@@ -25,9 +78,7 @@ The server can be started using the gradlew wrapper script:
 gradlew campuspath-api:bootRun
 ```
 
-## App
-
-### Starting Development Server
+### Start the Web App
 
 If you already have NPM and Angular CLI installed, running the following commands will work:
 
