@@ -56,18 +56,18 @@ Download and run the installer, then click "next" through the menus while verify
 ### Load the Database
 
 1) #### After installing PostgreSQL, launch "pgAdmin".
-   ![img.png](img.png)
+   ![](assets/database1.png)
    If the application isn't searchable, the default installation path is:
    `C:\Program Files\PostgreSQL\VERSION\pgAdmin 4\bin\pgAdmin4.exe`
 
 2) #### Enter the master user password if prompted, then create a new database:
-   ![img_1.png](img_1.png)
+   ![](assets/database2.png)
    Set the name to "campuspath" and keep the rest of the settings the same 
-   ![img_2.png](img_2.png)
+   ![](assets/database3.png)
 
 3) #### Use "Restore" to load the database from file
-   ![img_3.png](img_3.png)
-   ![img_4.png](img_4.png)
+   ![](assets/database4.png)
+   ![](assets/database5.png)
 
 
 ### Start the API Server
