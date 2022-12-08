@@ -65,10 +65,9 @@ Download and run the installer, then click "next" through the menus while verify
 
 2) #### Enter the master user password if prompted, then create a new database:
    <img height="300" src="assets/database2.png" alt=""/>
-
-   Set the name to "campuspath" and keep the rest of the settings the same
-
    <img height="300" src="assets/database3.png" alt=""/>
+   
+   Set the name to "campuspath" and keep the rest of the settings the same
 
 3) #### Use "Restore" to load the database from file
    <img height="300" src="assets/database4.png" alt=""/>
