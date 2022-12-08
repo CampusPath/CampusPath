@@ -38,36 +38,41 @@ The installer packaged with pgAdmin can be found [here](https://www.enterprisedb
 Download and run the installer, then click "next" through the menus while verifying the following:
 
 1) #### Ensure that "pgAdmin 4" is checked on the components screen
-   ![](assets/pgsql1.png)
+   <img height="300" src="assets/pgsql1.png" alt=""/>
 
 2) #### Set the superuser user password to "password".
-   ![](assets/pgsql2.png)
+   <img height="300" src="assets/pgsql2.png" alt=""/>
+
    - This is NOT a required step if [application.properties](../campuspath-api/src/main/resources/application.properties)
      is updated to reflect the desired value.
 
 3) #### Ensure that the server port is set to "5432" (the default value)
-   ![](assets/pgsql3.png)
+   <img height="300" src="assets/pgsql3.png" alt=""/>
+
    - This is NOT a required step if [application.properties](../campuspath-api/src/main/resources/application.properties)
      is updated to reflect the desired value.
 
 4) #### Don't launch StackBuilder on exit, it won't be required.
-   ![](assets/pgsql4.png)
+   <img height="300" src="assets/pgsql4.png" alt=""/>
 
 ### Load the Database
 
 1) #### After installing PostgreSQL, launch "pgAdmin".
-   ![](assets/database1.png)
+   <img height="300" src="assets/database1.png" alt=""/>
+   
    If the application isn't searchable, the default installation path is:
    `C:\Program Files\PostgreSQL\VERSION\pgAdmin 4\bin\pgAdmin4.exe`
 
 2) #### Enter the master user password if prompted, then create a new database:
-   ![](assets/database2.png)
-   Set the name to "campuspath" and keep the rest of the settings the same 
-   ![](assets/database3.png)
+   <img height="300" src="assets/database2.png" alt=""/>
+
+   Set the name to "campuspath" and keep the rest of the settings the same
+
+   <img height="300" src="assets/database3.png" alt=""/>
 
 3) #### Use "Restore" to load the database from file
-   ![](assets/database4.png)
-   ![](assets/database5.png)
+   <img height="300" src="assets/database4.png" alt=""/>
+   <img height="300" src="assets/database5.png" alt=""/>
 
 
 ### Start the API Server
