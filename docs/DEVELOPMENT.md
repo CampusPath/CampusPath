@@ -98,7 +98,7 @@ gradlew campuspath-web:ngServe
 ```
 
 Once all packages are installed and the website is bundled, the following message should appear:
-![](assets/serve.png)
+<img height="100" src="assets/serve.png" alt=""/>
 
 Navigate to the URL and you will be presented with a functional app:
 
