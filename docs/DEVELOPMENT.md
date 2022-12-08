@@ -1,4 +1,4 @@
-# Interactive Development zEnvironment Setup
+# Interactive Development Environment Setup
 
 **NOTE**: This guide currently covers the installation process for Windows. If you are on another
 operating system, the instructions in some steps may be insufficient or incomplete.
