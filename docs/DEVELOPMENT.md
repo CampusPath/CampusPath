@@ -1,4 +1,4 @@
-# Interactive Development Environment Setup
+# Interactive Development zEnvironment Setup
 
 **NOTE**: This guide currently covers the installation process for Windows. If you are on another
 operating system, the instructions in some steps may be insufficient or incomplete.
@@ -90,8 +90,20 @@ ng serve
 ```
 
 Otherwise, using the provided `ngServe` gradle task will download all the required packages
-and start the angular development server:
+and start the angular development server (Be prepared for this step to take a while,
+especially the first time it's run):
 
 ```
 gradlew campuspath-web:ngServe
 ```
+
+Once all packages are installed and the website is bundled, the following message should appear:
+![](assets/serve.png)
+
+Navigate to the URL and you will be presented with a functional app:
+
+<img height="300" src="assets/app1.png" alt=""/>
+<img height="300" src="assets/app2.png" alt=""/>
+<img height="300" src="assets/app3.png" alt=""/>
+<img height="300" src="assets/app4.png" alt=""/>
+<img height="300" src="assets/app5.png" alt=""/>
