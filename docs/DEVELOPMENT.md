@@ -102,8 +102,10 @@ Once all packages are installed and the website is bundled, the following messag
 
 Navigate to the URL and you will be presented with a functional app:
 
-<img height="300" src="assets/app1.png" alt=""/>
-<img height="300" src="assets/app2.png" alt=""/>
-<img height="300" src="assets/app3.png" alt=""/>
-<img height="300" src="assets/app4.png" alt=""/>
-<img height="300" src="assets/app5.png" alt=""/>
+<p float="left">
+   <img height="300" src="assets/app1.png" alt=""/>
+   <img height="300" src="assets/app2.png" alt=""/>
+   <img height="300" src="assets/app3.png" alt=""/>
+   <img height="300" src="assets/app4.png" alt=""/>
+   <img height="300" src="assets/app5.png" alt=""/>
+</p>
